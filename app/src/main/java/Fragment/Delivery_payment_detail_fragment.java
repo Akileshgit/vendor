@@ -39,7 +39,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
 
     private int deli_charges;
     Double total;
-SharedPreferences preferences;
+    SharedPreferences preferences;
     private DatabaseHandler db_cart;
     private Session_management sessionManagement;
 

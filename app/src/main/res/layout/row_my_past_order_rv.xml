@@ -63,46 +63,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Fonts.LatoBLack
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:text="@string/place_on"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_small" />
-
-                <Fonts.LatoBLack
-                    android:id="@+id/tv_order_date"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".8"
-                    android:text="Date"
-                    android:textColor="#000"
-                    android:textSize="@dimen/text_size_small" />
-
-                <Fonts.LatoBLack
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".3"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/time_t"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_small" />
-
-                <Fonts.LatoBLack
-                    android:id="@+id/tv_order_time"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/space_4"
-                    android:layout_weight="1"
-                    android:text="time"
-                    android:textSize="@dimen/text_size_small"
-                    android:textColor="#000" />
-
-            </LinearLayout>
+                android:orientation="horizontal"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="vendor.tcc.LoginActivity">
 
     <RelativeLayout
@@ -15,33 +16,36 @@
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:scaleType="centerCrop"
-           android:src="@drawable/shapes"/>
+            android:src="@color/white"/>
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="711dp"
         android:layout_marginTop="20dp"
+        android:background="@color/white"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:paddingBottom="@dimen/activity_vertical_margin">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="fill_parent"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
+            android:background="@color/white"
             android:gravity="center_horizontal"
-            android:src="@drawable/sp"
+            android:src="@drawable/logo"
             android:textAlignment="center" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
             <Fonts.LatoBLack
                 android:id="@+id/tv_login_email"
                 android:layout_width="wrap_content"
@@ -50,12 +54,7 @@
                 android:text="@string/tv_login_email"
                 android:textColor="#000"
                 android:textSize="14sp" />
-            <ImageView
-                android:id="@+id/iconnemail"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_marginTop="@dimen/space_10"
-                android:src="@drawable/iconn" />
+
 
         </LinearLayout>
 
@@ -64,20 +63,20 @@
             android:id="@+id/et_login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_4"
-            android:background="@drawable/xml_textbox_bg"
-            android:ems="10"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center_horizontal"
             android:inputType="textEmailAddress"
             android:padding="@dimen/space_10"
             android:textAlignment="center"
             android:textColor="#000"
-            android:textColorHint="@color/dark_gray"
-            android:textSize="14sp" />
+            android:textColorHint="@color/black"
+            android:textSize="@dimen/text_size_normal" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <Fonts.LatoBLack
                 android:id="@+id/tv_login_password"
@@ -88,32 +87,26 @@
                 android:textColor="#000"
                 android:textSize="14sp" />
 
-            <ImageView
-                android:id="@+id/iconp"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_marginTop="@dimen/space_10"
-                android:src="@drawable/iconn" />
 
         </LinearLayout>
 
-
-        <EditText
-            android:id="@+id/et_login_pass"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/layoutTextInput"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleDrawable="@drawable/show_password_selector"
+            android:textColorHint="@color/gray"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/space_10"
-            android:layout_marginTop="@dimen/space_4"
-            android:background="@drawable/xml_textbox_bg"
-            android:ems="10"
-            android:gravity="center_horizontal"
-            android:inputType="textPassword"
-            android:maxLength="10"
-            android:padding="@dimen/space_10"
-            android:textAlignment="center"
-            android:textColor="#000"
-            android:textColorHint="@color/dark_gray"
-            android:textSize="14sp" />
+            android:layout_height="wrap_content">
+
+
+            <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/et_login_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:layout_marginBottom="8dp"
+                android:inputType="textPassword"/>
+        </android.support.design.widget.TextInputLayout>
 
         <RelativeLayout
             android:id="@+id/btnContinue"
@@ -135,13 +128,6 @@
         </RelativeLayout>
 
 
-
-
-
-
-
-
-
         <Fonts.LatoBLack
             android:id="@+id/btnForgot"
             android:layout_width="wrap_content"
@@ -150,6 +136,41 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="Forget Password?"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+        <Fonts.LatoBLack
+            android:id="@+id/btncontact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="90dp"
+            android:gravity="center"
+            android:text="For Creating Account"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+        <Fonts.LatoBLack
+            android:id="@+id/btnnum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0dp"
+            android:gravity="center"
+            android:text="Whatsapp:+917349722228"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+        <Fonts.LatoBLack
+            android:id="@+id/btnemai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0dp"
+            android:gravity="center"
+            android:text="Email:contact@sabzishoppee.in"
             android:textColor="@color/black"
             android:textSize="13sp" />
     </LinearLayout>

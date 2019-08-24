@@ -33,7 +33,7 @@ public class AppController extends Application {
         locales.add(Locale.ENGLISH);
         locales.add(new Locale("ar","ARABIC"));
         LocaleHelper.setLocale(getApplicationContext(),"en");
-            }
+    }
 
     public static synchronized AppController getInstance() {
         return mInstance;

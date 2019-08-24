@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Vendor Ordering</string>
+    <string name="app_name" translatable="false">SabziShoppee</string>
     <string name="name" translatable="false">SameCiti - Customer</string>
     <string name="currency" translatable="false">\u20B9</string>
     <string name="title_activity_main" translatable="false">MainActivity</string>
@@ -88,7 +88,7 @@
     <string name="tv_del_title">Delivery Date/Time</string>
     <string name="tv_del_address">Delivery Address</string>
     <string name="et_del_address_hint">Enter Delivery address..</string>
-    <string name="tv_del_continue">Continue With Time</string>
+    <string name="tv_del_continue">Continue</string>
     <string name="tv_del_date">Select delivery date</string>
     <string name="tv_del_time">Select delivery time</string>
     <string name="tv_del_date_time">Delivery Data/Time</string>
@@ -114,12 +114,12 @@
     <string name="tv_toolbar_name" translatable="false">Rewards</string>
     <!-- row_product_rv.xml -->
     <string name="tv_pro_add">Add</string>
-    <string name="tv_pro_update">Update</string>
-    <string name="tv_pro_price">Price per\u0020</string>
+    <string name="tv_pro_update">Add</string>
+    <string name="tv_pro_price">/</string>
 
     <string name="tv_toolbar_price" translatable="false">Price :</string>
     <string name="tv_toolbar_redeem" translatable="false">Redeem</string>
-    <string name="tv_out" translatable="false">Out of Stock</string>
+    <string name="tv_out" translatable="false"><font color="#C70E1D">SoldOut</font></string>
     <string name="tv_rech" translatable="false">Enter Wallet Amount</string>
     <string name="tv_rech_wall" translatable="false">Recharge</string>
     <string name="tv_mywall" translatable="false">Recharge Wallet</string>
@@ -206,7 +206,7 @@
 
     <string name="add" translatable="false">Address</string>
     <string name="searchh" translatable="false">Search</string>
-    <string name="search_msg" translatable="false">Search Vegetables, Fruit etc</string>
+    <string name="search_msg" translatable="false">Search Vegetables, Fruit ,Leaf</string>
     <string name="change_password">Change Password</string>
     <string name="old_password">Old Password (Required)</string>
     <string name="new_password">New Password (Required)</string>

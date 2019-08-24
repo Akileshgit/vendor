@@ -46,7 +46,7 @@ SharedPreferences preferences;
 
             tv_title = (TextView) view.findViewById(R.id.tv_subcat_title);
             tv_price = (TextView) view.findViewById(R.id.tv_subcat_price);
-            tv_reward = (TextView) view.findViewById(R.id.tv_reward_point);
+
             tv_total = (TextView) view.findViewById(R.id.tv_subcat_total);
             tv_contetiy = (TextView) view.findViewById(R.id.tv_subcat_contetiy);
             tv_add = (TextView) view.findViewById(R.id.tv_subcat_add);
@@ -96,10 +96,7 @@ SharedPreferences preferences;
     map.put("category_id", modelList.get(position).getCategory_id());
     map.put("product_description", modelList.get(position).getProduct_description());
     map.put("deal_price", modelList.get(position).getDeal_price());
-    map.put("start_date", modelList.get(position).getStart_date());
-    map.put("start_time", modelList.get(position).getStart_time());
-    map.put("end_date", modelList.get(position).getEnd_date());
-    map.put("end_time", modelList.get(position).getEnd_time());
+
     map.put("price", modelList.get(position).getPrice());
     map.put("product_image", modelList.get(position).getProduct_image());
     map.put("status", modelList.get(position).getStatus());
@@ -300,10 +297,7 @@ SharedPreferences preferences;
                     map.put("category_id", modelList.get(position).getCategory_id());
                     map.put("product_description", modelList.get(position).getProduct_description());
                     map.put("deal_price", modelList.get(position).getDeal_price());
-                    map.put("start_date", modelList.get(position).getStart_date());
-                    map.put("start_time", modelList.get(position).getStart_time());
-                    map.put("end_date", modelList.get(position).getEnd_date());
-                    map.put("end_time", modelList.get(position).getEnd_time());
+
                     map.put("price", modelList.get(position).getPrice());
                     map.put("product_image", modelList.get(position).getProduct_image());
                     map.put("status", modelList.get(position).getStatus());

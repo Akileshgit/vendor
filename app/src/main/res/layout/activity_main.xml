@@ -18,12 +18,12 @@
         android:layout_width="@dimen/nav_view_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/colorPrimary"
+        android:background="@color/green"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
-        app:itemIconTint="#999999"
+        app:itemIconTint="@android:color/holo_green_dark"
         app:itemTextAppearance="@style/NavDrawerTextStyle"
-        app:itemTextColor="#fff"
+        app:itemTextColor="@color/black"
         app:menu="@menu/activity_main_drawer">
 
 

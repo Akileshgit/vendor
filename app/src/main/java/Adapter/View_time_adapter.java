@@ -52,18 +52,11 @@ public class View_time_adapter extends RecyclerView.Adapter<View_time_adapter.My
         //Socity_model mList = modelList.get(position);
         preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
         String language=preferences.getString("language","");
-if (language.contains("spanish")) {
-    String time=modelList.get(position);
-    time=time.replace("PM","م");
-    time=time.replace("AM","ص");
-    holder.title.setText(time);
 
-}else {
-    holder.title.setText(modelList.get(position));
 
 }
 
-    }
+
 
     @Override
     public int getItemCount() {

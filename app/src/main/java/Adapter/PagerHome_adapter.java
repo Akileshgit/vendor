@@ -14,10 +14,12 @@ import Model.Category_model;
 
 public class PagerHome_adapter extends FragmentPagerAdapter {
     int mNumOfTabs;
+    String apiResponse;
 
-    public PagerHome_adapter(FragmentManager fm, int NumOfTabs) {
+    public PagerHome_adapter(FragmentManager fm, int NumOfTabs, String apiResponse) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
+        this.apiResponse = apiResponse;
     }
 
     @Override
@@ -25,10 +27,10 @@ public class PagerHome_adapter extends FragmentPagerAdapter {
 
         switch (position) {
             case 0:
-                Fruit_fragment tab1 = new Fruit_fragment();
+                Vegetables_fragment tab1 = new Vegetables_fragment();
                 return tab1;
             case 1:
-                Vegetables_fragment tab2 = new Vegetables_fragment();
+                Fruit_fragment tab2 = new Fruit_fragment();
                 return tab2;
             case 2:
                 Leaf_fragment tab3 = new Leaf_fragment();

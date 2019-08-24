@@ -280,7 +280,7 @@ public class Product_fragment extends Fragment {
                                 }
                             }
                         } else {
-                          //  makeGetProductRequest(parent_id);
+                            //  makeGetProductRequest(parent_id);
                         }
 
                     }

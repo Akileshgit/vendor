@@ -22,28 +22,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/light_gray"
+            android:background="@color/white"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="57dp"
-                android:layout_gravity="bottom"
-                android:background="@color/green"
-                android:gravity="bottom">
-
-            </RelativeLayout>
 
                 <LinearLayout
                     android:id="@+id/search_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentBottom="true"
+
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/back_border"
+                    android:background="@drawable/bg_rounded_button"
                     android:orientation="horizontal">
 
 
@@ -68,7 +61,7 @@
                             android:layout_marginTop="@dimen/space_4"
                             android:layout_toRightOf="@id/lens"
                             android:gravity="top"
-                            android:text="Search For Products,Brands and More"
+                            android:text="Search For Farm Vegetables And Fruits"
                             android:textColor="@color/dark_gray"
                             android:textSize="12sp" />
                     </RelativeLayout>
@@ -88,6 +81,7 @@
         android:id="@+id/tab_layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         app:tabSelectedTextColor="@android:color/black"
         app:tabTextColor="@android:color/holo_green_dark">
 
@@ -95,13 +89,13 @@
             android:id="@+id/fruits"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="fruits" />
+            android:text="vegetables" />
 
         <android.support.design.widget.TabItem
             android:id="@+id/vegetables"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="vegetables" />
+            android:text="fruits" />
 
         <android.support.design.widget.TabItem
             android:id="@+id/leaf"
@@ -113,6 +107,7 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="match_parent" />
 
 

@@ -1,5 +1,6 @@
 package Fragment;
 
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
@@ -14,6 +15,7 @@ import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -98,12 +100,17 @@ public class Home_fragment extends Fragment  {
     private List<String> cat_menu_id = new ArrayList<>();
     private ViewPager viewPager;
     private List<Product_model> product_modelList = new ArrayList<>();
+    private List<Product_model> fruitsList = new ArrayList<>();
+    private List<Product_model> vegitablesList = new ArrayList<>();
+    private List<Product_model> leafsList = new ArrayList<>();
+    private List<Product_model> selectedCatList = new ArrayList<>();
     private boolean isSubcat = false;
     LinearLayout Search_layout;
     String getid;
     String getcat_title;
     ScrollView scrollView;
     SharedPreferences sharedpreferences;
+    PagerHome_adapter pagerHome_adapter;
 
     //Home Icons
     private Home_Icon_Adapter menu_adapter;
@@ -125,6 +132,7 @@ public class Home_fragment extends Fragment  {
     private ImageView iv_Call, iv_Whatspp, iv_reviews, iv_share_via;
     private TextView timer;
     Button View_all_deals, View_all_TopSell;
+    private String apiResponse;
 
     private ImageView Top_Selling_Poster, Deal_Of_Day_poster;
 
@@ -137,7 +145,33 @@ public class Home_fragment extends Fragment  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<Product_model>>() {
+            }.getType();
+            apiResponse = getArguments().getString("apiResponse");
+            product_modelList = gson.fromJson(apiResponse, listType);
+            if(product_modelList.size()>0)
+            {
+                for(int i=0;i<product_modelList.size();i++)
+                {
+                    if(Integer.parseInt(product_modelList.get(i).getCategory_id())==8)
+                    {
+                        fruitsList.add(product_modelList.get(i));
+                    }
+                    else if(Integer.parseInt(product_modelList.get(i).getCategory_id())==9)
+                    {
+                        vegitablesList.add(product_modelList.get(i));
+                    }
+                    else if(Integer.parseInt(product_modelList.get(i).getCategory_id())==10)
+                    {
+                        leafsList.add(product_modelList.get(i));
+                    }
+                }
+            }
+        }
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -168,13 +202,46 @@ public class Home_fragment extends Fragment  {
         TabItem tabChats = view.findViewById(R.id.fruits);
         TabItem tabStatus = view.findViewById(R.id.vegetables);
         TabItem tabCalls = view.findViewById(R.id.leaf);
-        ViewPager viewPager = view.findViewById(R.id.viewpager);
-        PagerHome_adapter pagerHome_adapter = new PagerHome_adapter(getFragmentManager(), tab_cat1.getTabCount());
+        viewPager = view.findViewById(R.id.viewpager);
+        pagerHome_adapter = new PagerHome_adapter(getFragmentManager(), tab_cat1.getTabCount(), apiResponse);
         viewPager.setAdapter(pagerHome_adapter);
+
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tab_cat1));
 
         tab_cat1.setSelectedTabIndicatorColor(getActivity().getResources().getColor(R.color.black));
+        tab_cat1.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                //Toast.makeText(getActivity(), "tabSelected:  " + tab.getText(), Toast.LENGTH_SHORT).show();
+               /* if(tab.getText().toString().equalsIgnoreCase("fruits"))
+                {
+                    selectedCatList.addAll(fruitsList);
+                }
+                else if(tab.getText().toString().equalsIgnoreCase("vegitables"))
+                {
+                    selectedCatList.addAll(vegitablesList);
+                }
+                else if(tab.getText().toString().equalsIgnoreCase("leafs"))
+                {
+                    selectedCatList.addAll(leafsList);
+                }*/
+                viewPager.setCurrentItem(tab.getPosition());
+                pagerHome_adapter.notifyDataSetChanged();
 
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+
+                // Reload your recyclerView here
+            }
+        });
 
 
 
@@ -193,7 +260,28 @@ public class Home_fragment extends Fragment  {
 
 
 
+        /*viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
+            // This method will be invoked when a new page becomes selected.
+            @Override
+            public void onPageSelected(int position) {
+                Toast.makeText(getActivity(),
+                        "Selected page position: " + position, Toast.LENGTH_SHORT).show();
+            }
+
+            // This method will be invoked when the current page is scrolled
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                // Code goes here
+            }
+
+            // Called when the scroll state changes:
+            // SCROLL_STATE_IDLE, SCROLL_STATE_DRAGGING, SCROLL_STATE_SETTLING
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                // Code goes here
+            }
+        });*/
 
 
 

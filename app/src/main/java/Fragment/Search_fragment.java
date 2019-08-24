@@ -135,7 +135,7 @@ public class Search_fragment extends Fragment {
                         rv_search.setAdapter(adapter_product);
                         adapter_product.notifyDataSetChanged();
 
-                        
+
                         if (getActivity() != null) {
                             if (product_modelList.isEmpty()) {
                                 Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();

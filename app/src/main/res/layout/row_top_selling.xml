@@ -26,7 +26,7 @@
                 android:id="@+id/iv_icon"
                 android:layout_width="80dp"
                 android:layout_height="90dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/ic_launcher" />
 
             <Fonts.LatoBLack
                 android:id="@+id/product_name"

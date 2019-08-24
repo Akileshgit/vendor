@@ -5,18 +5,85 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <Fonts.LatoBLack
+    <RelativeLayout
         android:id="@+id/txtdelivery"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/green"
-        android:textColor="#0A0A0A"
-        android:gravity="center_horizontal"
-        android:paddingBottom="@dimen/space_10"
-        android:paddingTop="@dimen/space_10"
-        android:text="@string/tv_del_title"
-        android:textSize="@dimen/text_size_normal"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ic_placeholder_select" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Adderss"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ic_confirm" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Confirm"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ic_credit_card_unselect" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Payment"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -34,6 +101,7 @@
                 android:id="@+id/radioLinear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:background="@drawable/xml_box_shadow_bottom"
                 android:orientation="vertical"
                 android:padding="@dimen/space_10">
@@ -199,7 +267,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_margin="12dp"
-            android:background="@drawable/bg_rounded_button"
+            android:background="@color/greenn"
             android:padding="12dp">
 
             <Fonts.LatoBLack
@@ -208,7 +276,7 @@
                 android:gravity="center"
                 android:text="@string/tv_del_continue"
                 android:textColor="#0A0A0A"
-                android:textSize="@dimen/text_size_small"/>
+                android:textSize="@dimen/text_size_X_small"/>
 
 
 

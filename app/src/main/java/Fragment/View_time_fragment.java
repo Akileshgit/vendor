@@ -1,8 +1,7 @@
 package Fragment;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -30,13 +29,13 @@ import Adapter.PagerHome_adapter;
 import Adapter.View_time_adapter;
 import Config.BaseURL;
 import Model.Category_model;
-import vendor.tcc.AppController;
-import vendor.tcc.MainActivity;
-import vendor.tcc.R;
 import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
 import util.RecyclerTouchListener;
 import util.Session_management;
+import vendor.tcc.AppController;
+import vendor.tcc.MainActivity;
+import vendor.tcc.R;
 
 public class View_time_fragment extends Fragment {
 

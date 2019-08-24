@@ -29,7 +29,7 @@ public class View_All_Deal_OfDay_Adapter extends RecyclerView.Adapter<View_All_D
     public int counter;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView product_nmae, product_prize, offer_product_prize, start_time, end_time;
+        public TextView product_nmae, product_prize, offer_product_prize;
         public ImageView image;
 
         public MyViewHolder(View view) {
@@ -37,8 +37,7 @@ public class View_All_Deal_OfDay_Adapter extends RecyclerView.Adapter<View_All_D
             product_nmae = (TextView) view.findViewById(R.id.product_name);
             product_prize = (TextView) view.findViewById(R.id.product_prize);
             offer_product_prize = (TextView) view.findViewById(R.id.offer_product_prize);
-            start_time = (TextView) view.findViewById(R.id.start_time);
-            end_time = (TextView) view.findViewById(R.id.end_time);
+
 
             product_prize.setPaintFlags(product_prize.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             image = (ImageView) view.findViewById(R.id.iv_icon);
@@ -78,8 +77,7 @@ public class View_All_Deal_OfDay_Adapter extends RecyclerView.Adapter<View_All_D
                 .into(holder.image);
         holder.product_prize.setText(context.getResources().getString(R.string.currency) + mList.getPrice());
         holder.product_nmae.setText(mList.getProduct_name());
-        holder.start_time.setText(mList.getStart_time());
-        holder.end_time.setText(mList.getEnd_time());
+
 
     }
 

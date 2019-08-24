@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/green"
+            android:background="@color/white"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:titleTextAppearance="@style/RobotoBoldTextAppearance">
 
@@ -81,10 +81,7 @@
             android:textColor="@color/green"
             android:textSize="16sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+
 
 
             <RelativeLayout
@@ -92,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_margin="12dp"
-                android:background="@drawable/bg_rounded_button"
+                android:background="@color/greenn"
                 android:padding="12dp">
 
                 <Fonts.LatoBLack
@@ -106,6 +103,6 @@
             </RelativeLayout>
 
         </LinearLayout>
-    </LinearLayout>
+
     </FrameLayout>
 </RelativeLayout>

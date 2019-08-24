@@ -46,7 +46,7 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
 
             tv_title = (TextView) view.findViewById(R.id.tv_subcat_title);
             tv_price = (TextView) view.findViewById(R.id.tv_subcat_price);
-            tv_reward = (TextView) view.findViewById(R.id.tv_reward_point);
+
             tv_total = (TextView) view.findViewById(R.id.tv_subcat_total);
             tv_contetiy = (TextView) view.findViewById(R.id.tv_subcat_contetiy);
             tv_add = (TextView) view.findViewById(R.id.tv_subcat_add);
@@ -96,10 +96,8 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
                 map.put("category_id", modelList.get(position).getCategory_id());
                 map.put("product_description", modelList.get(position).getProduct_description());
                 map.put("deal_price", modelList.get(position).getDeal_price());
-                map.put("start_date", modelList.get(position).getStart_date());
-                map.put("start_time", modelList.get(position).getStart_time());
-                map.put("end_date", modelList.get(position).getEnd_date());
-                map.put("end_time", modelList.get(position).getEnd_time());
+
+
                 map.put("price", modelList.get(position).getPrice());
                 map.put("product_image", modelList.get(position).getProduct_image());
                 map.put("status", modelList.get(position).getStatus());
@@ -127,8 +125,8 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
                 Double items = Double.parseDouble(dbcart.getInCartItemQty(map.get("product_id")));
 
                 Double price = Double.parseDouble(map.get("price").trim());
-                Double reward = Double.parseDouble(map.get("rewards"));
-                tv_reward.setText("" + reward * items);
+
+
                 tv_total.setText("" + price * items);
                 ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
 
@@ -187,9 +185,9 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
             holder.tv_title.setText(mList.getProduct_name_arb());
 
         }
-        holder.tv_reward.setText(mList.getRewards());
-        holder.tv_price.setText(context.getResources().getString(R.string.tv_pro_price) + mList.getUnit_value() + " " +
-                mList.getUnit() + mList.getPrice()+ context.getResources().getString(R.string.currency));
+
+        holder.tv_price.setText( mList.getPrice()+ context.getResources().getString(R.string.currency)+context.getResources().getString(R.string.tv_pro_price) + " " +
+                mList.getUnit() );
         if (Integer.valueOf(modelList.get(position).getStock())<=0){
             holder.tv_add.setText(R.string.tv_out);
             holder.tv_add.setTextColor(context.getResources().getColor(R.color.black));
@@ -209,7 +207,7 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
         Double price = Double.parseDouble(mList.getPrice());
         Double reward = Double.parseDouble(mList.getRewards());
         holder.tv_total.setText("" + price * items);
-        holder.tv_reward.setText("" + reward * items);
+
 
     }
 
@@ -300,10 +298,8 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
                 map.put("category_id", modelList.get(position).getCategory_id());
                 map.put("product_description", modelList.get(position).getProduct_description());
                 map.put("deal_price", modelList.get(position).getDeal_price());
-                map.put("start_date", modelList.get(position).getStart_date());
-                map.put("start_time", modelList.get(position).getStart_time());
-                map.put("end_date", modelList.get(position).getEnd_date());
-                map.put("end_time", modelList.get(position).getEnd_time());
+
+
                 map.put("price", modelList.get(position).getPrice());
                 map.put("product_image", modelList.get(position).getProduct_image());
                 map.put("status", modelList.get(position).getStatus());

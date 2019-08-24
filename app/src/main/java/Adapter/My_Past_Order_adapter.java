@@ -37,8 +37,8 @@ SharedPreferences preferences;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_orderno, tv_status, tv_date, tv_time, tv_price, tv_item, relativetextstatus, tv_tracking_date;
-        public TextView tv_pending_date, tv_pending_time, tv_confirm_date, tv_confirm_time, tv_delevered_date, tv_delevered_time, tv_cancel_date, tv_cancel_time;
+        public TextView tv_orderno, tv_status,  tv_price, tv_item, relativetextstatus;
+
         public View view1, view2, view3, view4, view5, view6;
         public RelativeLayout relative_background;
         public ImageView Confirm, Out_For_Deliverde, Delivered;
@@ -52,9 +52,6 @@ SharedPreferences preferences;
             tv_orderno = (TextView) view.findViewById(R.id.tv_order_no);
             tv_status = (TextView) view.findViewById(R.id.tv_order_status);
             relativetextstatus = (TextView) view.findViewById(R.id.status);
-            tv_tracking_date = (TextView) view.findViewById(R.id.tracking_date);
-            tv_date = (TextView) view.findViewById(R.id.tv_order_date);
-            tv_time = (TextView) view.findViewById(R.id.tv_order_time);
             tv_price = (TextView) view.findViewById(R.id.tv_order_price);
             tv_item = (TextView) view.findViewById(R.id.tv_order_item);
             cardView = view.findViewById(R.id.card_view);
@@ -63,14 +60,7 @@ SharedPreferences preferences;
 //            //Payment Method
             tv_methid1 = (TextView) view.findViewById(R.id.method1);
             //Date And Time
-            tv_pending_date = (TextView) view.findViewById(R.id.pending_date);
-//            tv_pending_time = (TextView) view.findViewById(R.id.pending_time);
-            tv_confirm_date = (TextView) view.findViewById(R.id.confirm_date);
-//            tv_confirm_time = (TextView) view.findViewById(R.id.confirm_time);
-            tv_delevered_date = (TextView) view.findViewById(R.id.delevered_date);
-//            tv_delevered_time = (TextView) view.findViewById(R.id.delevered_time);
-            tv_cancel_date = (TextView) view.findViewById(R.id.cancel_date);
-//            tv_cancel_time = (TextView) view.findViewById(R.id.cancel_time);
+
             //Oredre Tracking
             view1 = (View) view.findViewById(R.id.view1);
             view2 = (View) view.findViewById(R.id.view2);
@@ -146,44 +136,16 @@ SharedPreferences preferences;
         }
 
         holder.tv_methid1.setText(mList.getPayment_method());
-        holder.tv_date.setText(mList.getOn_date());
-        holder.tv_tracking_date.setText(mList.getOn_date());
+
 
         preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
         String language=preferences.getString("language","");
-        if (language.contains("spanish")) {
-            String timefrom=mList.getDelivery_time_from();
-            String timeto=mList.getDelivery_time_to();
 
-            timefrom=timefrom.replace("pm","م");
-            timefrom=timefrom.replace("am","ص");
-
-            timeto=timeto.replace("pm","م");
-            timeto=timeto.replace("am","ص");
-
-            String time=timefrom + "-" + timeto;
-
-            holder.tv_time.setText(time);
-        }else {
-
-            String timefrom=mList.getDelivery_time_from();
-            String timeto=mList.getDelivery_time_to();
-            String time=timefrom + "-" + timeto;
-
-            holder.tv_time.setText(time);
-
-        }
 
         holder.tv_price.setText(context.getResources().getString(R.string.currency) + mList.getTotal_amount());
         holder.tv_item.setText(context.getResources().getString(R.string.tv_cart_item) + mList.getTotal_items());
 //        holder.tv_pending_time.setText(mList.getDelivery_time_from() + "-" + mList.getDelivery_time_to());
-        holder.tv_pending_date.setText(mList.getOn_date());
-//        holder.tv_confirm_time.setText(mList.getDelivery_time_from() + "-" + mList.getDelivery_time_to());
-        holder.tv_confirm_date.setText(mList.getOn_date());
-//        holder.tv_delevered_time.setText(mList.getDelivery_time_from() + "-" + mList.getDelivery_time_to());
-        holder.tv_delevered_date.setText(mList.getOn_date());
-//        holder.tv_cancel_time.setText(mList.getDelivery_time_from() + "-" + mList.getDelivery_time_to());
-        holder.tv_cancel_date.setText(mList.getOn_date());
+
     }
 
 

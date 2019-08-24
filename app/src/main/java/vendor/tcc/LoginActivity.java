@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static String TAG = LoginActivity.class.getSimpleName();
     private RelativeLayout btn_continue, btn_register;
     private EditText et_password, et_email;
-    private TextView tv_password, tv_email, btn_forgot;
+    private TextView tv_password, tv_email, btn_forgot,btn_contact,btn_num,btn_emai;
     private Session_management sessionManagement;
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -58,6 +58,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btn_continue = (RelativeLayout) findViewById(R.id.btnContinue);
         btn_register = (RelativeLayout) findViewById(R.id.btnRegister);
         btn_forgot = (TextView) findViewById(R.id.btnForgot);
+        btn_contact= (TextView) findViewById(R.id.btncontact);
+        btn_num= (TextView) findViewById(R.id.btnnum);
+        btn_emai= (TextView) findViewById(R.id.btnemai);
 
         btn_continue.setOnClickListener(this);
 
@@ -69,10 +72,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.btnContinue) {
+            attemptLogin();
+        } else if (id == R.id.btnRegister) {
             Intent startRegister = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(startRegister);
-            attemptLogin();
-
         } else if (id == R.id.btnForgot) {
             Intent startRegister = new Intent(LoginActivity.this, ForgotActivity.class);
             startActivity(startRegister);

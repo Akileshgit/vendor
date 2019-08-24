@@ -21,6 +21,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private Session_management sessionManagement;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,13 +107,14 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void go_next() {
-        /*if(sessionManagement.isLoggedIn()) {*/
+        if(sessionManagement.isLoggedIn()) {
         Intent startmain = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(startmain);
-        /*}else{
+        }
+        else{
             Intent startmain = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(startmain);
-        }*/
+        }
         finish();
     }
 

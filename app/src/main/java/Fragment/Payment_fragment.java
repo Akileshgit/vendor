@@ -314,7 +314,7 @@ public class Payment_fragment extends Fragment {
                         "\n" + "\nuser_id:" + getuser_id + "\n" + getlocation_id + getstore_id + "\ndata:" + passArray.toString());
 
 
-    makeAddOrderRequest(getdate, gettime, getuser_id, getlocation_id, getstore_id, passArray);
+                makeAddOrderRequest(getdate, gettime, getuser_id, getlocation_id, getstore_id, passArray);
 
 
             }
@@ -423,7 +423,7 @@ public class Payment_fragment extends Fragment {
                                 for (int i = 0; i < Jarray.length(); i++) {
                                     JSONObject json_data = Jarray.getJSONObject(i);
                                     String Wallet_amount = json_data.getString("wallet");
-                                     Used_Wallet_amount = json_data.getString("used_wallet");
+                                    Used_Wallet_amount = json_data.getString("used_wallet");
                                     total_amount = json_data.getString("total");
                                     if (total_amount.equals("0")) {
                                         rb_Cod.setText("Home Delivery");
@@ -599,7 +599,7 @@ public class Payment_fragment extends Fragment {
             }
             getActivity().startActivity(myIntent1);
         }
-               if (rb_paytm.isChecked()) {
+        if (rb_paytm.isChecked()) {
             Intent myIntent1 = new Intent(getActivity(), Paytm.class);
             if (checkBox_Wallet.isChecked()) {
                 myIntent1.putExtra("total", total_amount);

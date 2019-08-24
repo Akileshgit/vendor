@@ -20,59 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="2">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <Fonts.LatoBLack
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/start_time"
-                    android:textColor="#837e7e"
-                    android:textSize="8sp" />
-
-                <Fonts.LatoBLack
-                    android:id="@+id/start_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="@dimen/text_size_small" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <Fonts.LatoBLack
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/end_time"
-                    android:textColor="#837e7e"
-                    android:textSize="8sp" />
-
-                <Fonts.LatoBLack
-                    android:id="@+id/end_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="@dimen/text_size_small" />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
+            android:weightSum="2"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -86,7 +34,7 @@
                 android:id="@+id/iv_icon"
                 android:layout_width="80dp"
                 android:layout_height="90dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/ic_launcher" />
 
 
             <Fonts.LatoBLack

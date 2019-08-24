@@ -57,7 +57,7 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
 
     private static String TAG = Edit_profile_fragment.class.getSimpleName();
 
-    private EditText et_phone, et_name, et_email, et_house;
+    private TextView et_phone, et_name, et_email, et_house;
     private RelativeLayout btn_update;
     private TextView tv_phone, tv_name, tv_email, tv_house, tv_socity, btn_socity;
     private ImageView iv_profile;
@@ -91,12 +91,12 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
 
         sessionManagement = new Session_management(getActivity());
 
-        et_phone = (EditText) view.findViewById(R.id.et_pro_phone);
-        et_name = (EditText) view.findViewById(R.id.et_pro_name);
+        et_phone = (TextView) view.findViewById(R.id.et_pro_phone);
+        et_name = (TextView) view.findViewById(R.id.et_pro_name);
         tv_phone = (TextView) view.findViewById(R.id.tv_pro_phone);
         tv_name = (TextView) view.findViewById(R.id.tv_pro_name);
         tv_email = (TextView) view.findViewById(R.id.tv_pro_email);
-        et_email = (EditText) view.findViewById(R.id.et_pro_email);
+        et_email = (TextView) view.findViewById(R.id.et_pro_email);
         iv_profile = (ImageView) view.findViewById(R.id.iv_pro_img);
         /*et_house = (EditText) view.findViewById(R.id.et_pro_home);
         tv_house = (TextView) view.findViewById(R.id.tv_pro_home);

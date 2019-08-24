@@ -66,15 +66,14 @@ public class Thanks_fragment extends Fragment implements View.OnClickListener {
         });
 
         String data = getArguments().getString("msg");
-     String dataarb=getArguments().getString("msgarb");
+
         tv_info = (TextView) view.findViewById(R.id.tv_thank_info);
         btn_home = (RelativeLayout) view.findViewById(R.id.btn_thank_home);
         btn_order = (RelativeLayout) view.findViewById(R.id.btn_track_order);
 
         if (language.contains("english")) {
             tv_info.setText(Html.fromHtml(data));
-        }else {
-            tv_info.setText(Html.fromHtml(dataarb));       }
+        }
 
 
         btn_home.setOnClickListener(this);

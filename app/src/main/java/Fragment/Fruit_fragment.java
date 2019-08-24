@@ -69,6 +69,7 @@ public class Fruit_fragment extends Fragment {
     private List<Category_model> category_modelList = new ArrayList<>();
     private List<String> cat_menu_id = new ArrayList<>();
     private List<Product_model> product_modelList = new ArrayList<>();
+    private List<Product_model> fruitsList = new ArrayList<>();
     private Fruit_adapter adapter_fruit;
     private SliderLayout banner_slider;
     String language;
@@ -128,7 +129,6 @@ public class Fruit_fragment extends Fragment {
 
 
 
-
         return view;
     }
 
@@ -155,7 +155,19 @@ public class Fruit_fragment extends Fragment {
                         Type listType = new TypeToken<List<Product_model>>() {
                         }.getType();
                         product_modelList = gson.fromJson(response.getString("data"), listType);
-                        adapter_fruit = new Fruit_adapter(product_modelList, getActivity());
+                        if(product_modelList.size()>0)
+                        {
+                            fruitsList.clear();
+                            for(int i=0;i<product_modelList.size();i++)
+                            {
+                                if(Integer.parseInt(product_modelList.get(i).getCategory_id())==8)
+                                {
+                                    fruitsList.add(product_modelList.get(i));
+                                }
+
+                            }
+                        }
+                        adapter_fruit = new Fruit_adapter(fruitsList, getActivity());
                         rv_cat.setAdapter(adapter_fruit);
                         adapter_fruit.notifyDataSetChanged();
                         if (getActivity() != null) {

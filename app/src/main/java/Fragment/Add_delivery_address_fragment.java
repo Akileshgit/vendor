@@ -139,13 +139,13 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
 
             if (!TextUtils.isEmpty(getpincode)) {*/
 
-                Bundle args = new Bundle();
-                Fragment fm = new Socity_fragment();
-                //args.putString("pincode", getpincode);
-                fm.setArguments(args);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
+            Bundle args = new Bundle();
+            Fragment fm = new Socity_fragment();
+            //args.putString("pincode", getpincode);
+            fm.setArguments(args);
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                    .addToBackStack(null).commit();
             /*} else {
                 Toast.makeText(getActivity(), getResources().getString(R.string.please_enter_pincode), Toast.LENGTH_SHORT).show();
             }*/

@@ -63,7 +63,7 @@ public class JSONParse {
             }
             retSrc=x.toString();
 
-           // Log.e("json parse ", " the value is "+ retSrc);
+            // Log.e("json parse ", " the value is "+ retSrc);
 
             jObj = new JSONObject(retSrc);
         } catch (Exception e) {
@@ -80,7 +80,7 @@ public class JSONParse {
                 urlConnection.disconnect();
             }
         }
-       // Log.e("jsonpardse ", "respone is "+ jObj.toString() );
+        // Log.e("jsonpardse ", "respone is "+ jObj.toString() );
         return jObj;
     }
 }

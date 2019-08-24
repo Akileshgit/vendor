@@ -77,7 +77,7 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
     private List<Delivery_address_model> delivery_address_modelList = new ArrayList<>();
 
     private DatabaseHandler db_cart;
-SharedPreferences preferences;
+    SharedPreferences preferences;
     private Session_management sessionManagement;
 
     private int mYear, mMonth, mDay, mHour, mMinute;
@@ -87,7 +87,7 @@ SharedPreferences preferences;
 
     private String deli_charges;
     String store_id;
-String language;
+    String language;
     public Delivery_fragment() {
         // Required empty public constructor
     }
@@ -165,8 +165,8 @@ String language;
             language=preferences.getString("language","");
             if (language.contains("spanish")) {
                 String timeset=time;
-                 timeset=timeset.replace("PM","م");
-                 timeset=timeset.replace("AM","ص");
+                timeset=timeset.replace("PM","م");
+                timeset=timeset.replace("AM","ص");
                 tv_time.setText(timeset);
 
             }
@@ -271,14 +271,14 @@ String language;
 
         boolean cancel = false;
 
-        if (TextUtils.isEmpty(getdate)) {
+      /*  if (TextUtils.isEmpty(getdate)) {
             Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
             cancel = true;
         } else if (TextUtils.isEmpty(gettime)) {
             Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
             cancel = true;
         }
-
+*/
         if (!delivery_address_modelList.isEmpty()) {
             if (adapter.ischeckd()) {
                 location_id = adapter.getlocation_id();

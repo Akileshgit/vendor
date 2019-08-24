@@ -81,15 +81,15 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
         language=preferences.getString("language","");
             holder.tv_title.setText(map.get("product_name"));
 
-        holder.tv_reward.setText(map.get("rewards"));
+
         holder.tv_price.setText(activity.getResources().getString(R.string.tv_pro_price) + map.get("unit_value") + " " +
                 map.get("unit")  + map.get("price")+activity.getResources().getString(R.string.currency));
         holder.tv_contetiy.setText(map.get("qty"));
         Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id")));
         Double price = Double.parseDouble(map.get("price"));
-        Double reward = Double.parseDouble(map.get("rewards"));
+
         holder.tv_total.setText("" + price * items);
-        holder.tv_reward.setText("" + reward * items);
+
         holder.iv_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,9 +131,9 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
 
                 Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id")));
                 Double price = Double.parseDouble(map.get("price"));
-                Double reward = Double.parseDouble(map.get("rewards"));
+
                 holder.tv_total.setText("" + price * items);
-                holder.tv_reward.setText("" + reward * items);
+
              //   holder.tv_total.setText(activity.getResources().getString(R.string.tv_cart_total) + price * items + " " + activity.getResources().getString(R.string.currency));
                 updateintent();
             }
@@ -168,7 +168,7 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
             tv_title = (TextView) view.findViewById(R.id.tv_subcat_title);
             tv_price = (TextView) view.findViewById(R.id.tv_subcat_price);
             tv_total = (TextView) view.findViewById(R.id.tv_subcat_total);
-            tv_reward = (TextView) view.findViewById(R.id.tv_reward_point);
+
             tv_contetiy = (TextView) view.findViewById(R.id.tv_subcat_contetiy);
             tv_add = (TextView) view.findViewById(R.id.tv_subcat_add);
             iv_logo = (ImageView) view.findViewById(R.id.iv_subcat_img);

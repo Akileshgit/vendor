@@ -12,12 +12,7 @@
         app:actionLayout="@layout/menu_cart_layout"
         app:icon="@drawable/language"
         app:showAsAction="ifRoom" />-->
-    <item
-        android:id="@+id/action_language"
-        android:title="Language"
-        android:icon="@drawable/language"
-        app:showAsAction="always"
-        />
+
 
     <item
         android:id="@+id/action_cart"

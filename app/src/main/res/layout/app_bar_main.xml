@@ -18,12 +18,17 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@color/white"
             android:elevation="4dp"
-            android:background="@color/green"
-            app:titleTextAppearance="@style/RobotoBoldTextAppearance"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextAppearance="@style/RobotoBoldTextAppearance">
 
-
+            <ImageView
+                android:id="@+id/logoXmarks"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/logo" />
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>

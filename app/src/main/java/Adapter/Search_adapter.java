@@ -47,7 +47,7 @@ public class Search_adapter extends RecyclerView.Adapter<Search_adapter.MyViewHo
             super(view);
             tv_title = (TextView) view.findViewById(R.id.tv_subcat_title);
             tv_price = (TextView) view.findViewById(R.id.tv_subcat_price);
-            tv_reward = (TextView) view.findViewById(R.id.tv_reward_point);
+
             tv_total = (TextView) view.findViewById(R.id.tv_subcat_total);
             tv_contetiy = (TextView) view.findViewById(R.id.tv_subcat_contetiy);
             tv_add = (TextView) view.findViewById(R.id.tv_subcat_add);
@@ -100,10 +100,7 @@ public class Search_adapter extends RecyclerView.Adapter<Search_adapter.MyViewHo
                 map.put("category_id",modelList.get(position).getCategory_id());
                 map.put("product_description", modelList.get(position).getProduct_description());
                 map.put("deal_price", modelList.get(position).getDeal_price());
-                map.put("start_date", modelList.get(position).getStart_date());
-                map.put("start_time", modelList.get(position).getStart_time());
-                map.put("end_date", modelList.get(position).getEnd_date());
-                map.put("end_time", modelList.get(position).getEnd_time());
+
                 map.put("price", modelList.get(position).getPrice());
                 map.put("product_image", modelList.get(position).getProduct_image());
                 map.put("status", modelList.get(position).getStatus());
@@ -185,10 +182,9 @@ public class Search_adapter extends RecyclerView.Adapter<Search_adapter.MyViewHo
                 .into(holder.iv_logo);
 
         holder.tv_title.setText(mList.getProduct_name());
-        holder.tv_reward.setText(mList.getRewards());
-        holder.tv_price.setText(context.getResources().getString(R.string.tv_pro_price) + mList.getUnit_value() + " " +
-                mList.getUnit() + " " + context.getResources().getString(R.string.currency) + " " + mList.getPrice());
 
+        holder.tv_price.setText( mList.getPrice()+ context.getResources().getString(R.string.currency)+context.getResources().getString(R.string.tv_pro_price) + " " +
+                mList.getUnit() );
         if (dbcart.isInCart(mList.getProduct_id())) {
             holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
             holder.tv_contetiy.setText(dbcart.getCartItemQty(mList.getProduct_id()));
@@ -198,8 +194,7 @@ public class Search_adapter extends RecyclerView.Adapter<Search_adapter.MyViewHo
 
         Double items = Double.parseDouble(dbcart.getInCartItemQty(mList.getProduct_id()));
         Double price = Double.parseDouble(mList.getPrice());
-        Double reward = Double.parseDouble(mList.getRewards());
-        holder.tv_reward.setText("" + reward * items);
+
 
 
         holder.tv_total.setText("" + price * items);
@@ -295,10 +290,7 @@ public class Search_adapter extends RecyclerView.Adapter<Search_adapter.MyViewHo
                 map.put("category_id",modelList.get(position).getCategory_id());
                 map.put("product_description", modelList.get(position).getProduct_description());
                 map.put("deal_price", modelList.get(position).getDeal_price());
-                map.put("start_date", modelList.get(position).getStart_date());
-                map.put("start_time", modelList.get(position).getStart_time());
-                map.put("end_date", modelList.get(position).getEnd_date());
-                map.put("end_time", modelList.get(position).getEnd_time());
+
                 map.put("price", modelList.get(position).getPrice());
                 map.put("product_image", modelList.get(position).getProduct_image());
                 map.put("status", modelList.get(position).getStatus());

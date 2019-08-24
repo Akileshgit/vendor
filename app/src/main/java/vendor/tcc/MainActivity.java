@@ -1,6 +1,7 @@
 package vendor.tcc;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -21,6 +22,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AlertDialog;
 import android.telephony.PhoneNumberUtils;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -55,6 +57,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import Adapter.Fruit_adapter;
 import Config.BaseURL;
 import Config.SharedPref;
 import Fonts.CustomTypefaceSpan;
@@ -136,6 +139,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private List<String> cat_menu_id = new ArrayList<>();
     private List<Product_model> product_modelList = new ArrayList<>();
     private Product_adapter adapter_product;
+    private Fruit_adapter adapter_fruit;
+    private String apiResponse;
 
     ImageView imageView;
     TextView mTitle;
@@ -148,18 +153,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     LinearLayout Change_Store;
     String Store_Count;
-SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     @Override
     protected void attachBaseContext(Context newBase) {
 
 
 
-                newBase = LocaleHelper.onAttach(newBase);
+        newBase = LocaleHelper.onAttach(newBase);
 
-                super.attachBaseContext(newBase);
-            }
-
+        super.attachBaseContext(newBase);
+    }
 
 
     @Override
@@ -172,13 +176,13 @@ SharedPreferences sharedPreferences;
         sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
 
 
-         editor = sharedPreferences.edit();
+        editor = sharedPreferences.edit();
 
-         editor.putString("language", "english");
+        editor.putString("language", "english");
 
 
 
-              if (getIntent().getExtras() != null) {
+        if (getIntent().getExtras() != null) {
 
             for (String key : getIntent().getExtras().keySet()) {
                 String value = getIntent().getExtras().getString(key);
@@ -272,11 +276,10 @@ SharedPreferences sharedPreferences;
 
 
         View headerView = navigationView.getHeaderView(0);
-        navigationView.getBackground().setColorFilter(0x80000000, PorterDuff.Mode.MULTIPLY);
         navigationView.setNavigationItemSelectedListener(this);
         nav_menu = navigationView.getMenu();
         View header = ((NavigationView) findViewById(R.id.nav_view)).getHeaderView(0);
-        Change_Store = (LinearLayout) header.findViewById(R.id.change_store_btn);
+
         viewpa=(LinearLayout) header.findViewById(R.id.viewpa);
         if (sessionManagement.isLoggedIn()) {
             viewpa.setVisibility(View.VISIBLE);
@@ -299,7 +302,7 @@ SharedPreferences sharedPreferences;
         iv_profile = (ImageView) header.findViewById(R.id.iv_header_img);
         tv_name = (TextView) header.findViewById(R.id.tv_header_name);
         My_Order = (LinearLayout) header.findViewById(R.id.my_orders);
-        My_Reward = (LinearLayout) header.findViewById(R.id.my_reward);
+
         My_Walllet = (LinearLayout) header.findViewById(R.id.my_wallet);
         My_Cart = (LinearLayout) header.findViewById(R.id.my_cart);
 
@@ -313,15 +316,7 @@ SharedPreferences sharedPreferences;
 
             }
         });
-        My_Reward.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fm = new Reward_fragment();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
-            }
-        });
+
         My_Walllet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -407,10 +402,14 @@ SharedPreferences sharedPreferences;
                                 toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("apiResponse", apiResponse);
                                         Fragment fm = new Home_fragment();
+                                        fm.setArguments(bundle);
                                         FragmentManager fragmentManager = getSupportFragmentManager();
                                         fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                                                 .addToBackStack(null).commit();
+
                                     }
                                 });
                             } else {
@@ -445,6 +444,8 @@ SharedPreferences sharedPreferences;
 //            MyFirebaseRegister fireReg = new MyFirebaseRegister(this);
 //            fireReg.RegisterUser(sessionManagement.getUserDetails().get(BaseURL.KEY_ID));
 //        }
+
+        makeGetProductRequest("123");
 
     }
 
@@ -522,6 +523,7 @@ SharedPreferences sharedPreferences;
                         Gson gson = new Gson();
                         Type listType = new TypeToken<List<Product_model>>() {
                         }.getType();
+                        apiResponse = response.getString("data");
                         product_modelList = gson.fromJson(response.getString("data"), listType);
                         adapter_product = new Product_adapter(product_modelList, MainActivity.this);
                         rv_cat.setAdapter(adapter_product);
@@ -619,7 +621,7 @@ SharedPreferences sharedPreferences;
     }
 
     public void setTitle(String title) {
-        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
 
@@ -676,9 +678,7 @@ SharedPreferences sharedPreferences;
         int id = item.getItemId();
         Fragment fm = null;
         Bundle args = new Bundle();
-        if (id == R.id.nav_shop_now) {
-            fm = new Shop_Now_fragment();
-        } else if (id == R.id.nav_my_profile) {
+         if (id == R.id.nav_my_profile) {
             fm = new Edit_profile_fragment();
         } else if (id == R.id.nav_support) {
             String smsNumber = "917349722228";
@@ -687,29 +687,23 @@ SharedPreferences sharedPreferences;
             sendIntent.putExtra("jid",     PhoneNumberUtils.stripSeparators(smsNumber)+"@s.whatsapp.net");//phone number without "+" prefix
             startActivity(sendIntent);
 
-        } else if (id == R.id.nav_aboutus) {
-            toolbar.setTitle("About");
-            fm = new About_us_fragment();
-            args.putString("url", BaseURL.GET_ABOUT_URL);
-            args.putString("title", getResources().getString(R.string.nav_about));
-            fm.setArguments(args);
+
         } else if (id == R.id.nav_policy) {
             fm = new Terms_and_Condition_fragment();
             args.putString("url", BaseURL.GET_TERMS_URL);
             args.putString("title", getResources().getString(R.string.nav_terms));
             fm.setArguments(args);
-        } else if (id == R.id.nav_review) {
-            //reviewOnApp();
-        } else if (id == R.id.nav_contact) {
-            fm = new Contact_Us_fragment();
-            args.putString("url", BaseURL.GET_SUPPORT_URL);
-            args.putString("title", getResources().getString(R.string.nav_terms));
-            fm.setArguments(args);
-        } else if (id == R.id.nav_share) {
-            shareApp();
+
+
         } else if (id == R.id.nav_logout) {
             sessionManagement.logoutSession();
-            finish();
+             Intent intent = new Intent(this, LoginActivity.class);
+             intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+             finish();
+             startActivity(intent);
+
 
         } else if (id == R.id.nav_powerd) {
             // stripUnderlines(textView);
@@ -855,6 +849,7 @@ SharedPreferences sharedPreferences;
         // register reciver
 
     }
+
 
 
 }
