@@ -100,28 +100,28 @@ public class Paytm extends Activity {
     public void onStartTransaction(View view) throws InterruptedException, ExecutionException {
 
 
-           PaytmPGService Service = PaytmPGService.getStagingService();
-         //   PaytmPGService Service = PaytmPGService.getProductionService();
+        PaytmPGService Service = PaytmPGService.getStagingService();
+        //   PaytmPGService Service = PaytmPGService.getProductionService();
 
-            Log.d("before request", "some");
-            String edtemail = edt_email.getText().toString().trim();
-            String edtmobile = edt_mobile.getText().toString().trim();
-            String edtamount = edt_amount.getText().toString().trim();
-            JSONObject postData = new JSONObject();
+        Log.d("before request", "some");
+        String edtemail = edt_email.getText().toString().trim();
+        String edtmobile = edt_mobile.getText().toString().trim();
+        String edtamount = edt_amount.getText().toString().trim();
+        JSONObject postData = new JSONObject();
 
-            HashMap<String, String> stringHashMap = new HashMap<>();
-            stringHashMap.put("orderid", orderId);
-            stringHashMap.put("email", edtemail);
-            stringHashMap.put("mobile", edtmobile);
-            stringHashMap.put("amount", edtamount);
+        HashMap<String, String> stringHashMap = new HashMap<>();
+        stringHashMap.put("orderid", orderId);
+        stringHashMap.put("email", edtemail);
+        stringHashMap.put("mobile", edtmobile);
+        stringHashMap.put("amount", edtamount);
 
-            SendDeviceDetails sendDeviceDetails = null;
-            try {
-                sendDeviceDetails = new SendDeviceDetails(url, getPostDataString(stringHashMap), Service);
-                sendDeviceDetails.execute();
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+        SendDeviceDetails sendDeviceDetails = null;
+        try {
+            sendDeviceDetails = new SendDeviceDetails(url, getPostDataString(stringHashMap), Service);
+            sendDeviceDetails.execute();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
     }
 

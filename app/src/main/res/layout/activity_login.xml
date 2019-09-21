@@ -65,10 +65,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:gravity="center_horizontal"
             android:inputType="textEmailAddress"
             android:padding="@dimen/space_10"
-            android:textAlignment="center"
             android:textColor="#000"
             android:textColorHint="@color/black"
             android:textSize="@dimen/text_size_normal" />
@@ -100,7 +98,7 @@
 
 
             <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/et_login_pass"
+                android:id="@+id/et_login_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
@@ -122,7 +120,7 @@
                 android:gravity="center"
                 android:text="@string/btn_continue"
                 android:textColor="#090808"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="@dimen/text_size_normal" />
 
 
         </RelativeLayout>

@@ -57,6 +57,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/input_bar"
+        android:layout_marginBottom="0dp"
+        android:visibility="gone"
         android:background="#fff"
         android:orientation="horizontal">
 
@@ -65,6 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
+            android:visibility="gone"
             android:padding="@dimen/space_10">
 
             <Fonts.LatoBLack
@@ -100,6 +103,8 @@
             <Fonts.LatoBLack
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="12dp"
                 android:gravity="center"
                 android:text="@string/tv_order_cancle"
                 android:textColor="#070606"

@@ -8,9 +8,28 @@
         <item name="colorAccent">#0C0C0C</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="textAppearanceListItem">@style/list_item_appearance</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
 
 
+    </style>
+
+    <style name="ToolbarColoredBackArrow" parent="AppTheme">
+        <item name="android:textColorSecondary">@color/pdlg_color_white</item>
+    </style>
+
+    <style name="list_item_appearance">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="MyCustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MenuItemStyle" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 
@@ -48,7 +67,7 @@
         <item name="android:fontFamily">@font/cold</item>
         <item name="android:textColor">#050505</item>
         <item name="android:textSize">@dimen/text_size_large</item>
-</style>
+    </style>
     <style name="NavDrawerTextStyle" parent="Base.TextAppearance.AppCompat">
         <item name="android:textColor">#050505</item>
         <item name="android:layout_marginRight">16dp</item>

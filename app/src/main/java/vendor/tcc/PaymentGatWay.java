@@ -77,7 +77,7 @@ public class PaymentGatWay extends Activity implements PaymentResultListener {
 //        callInstamojoPay(email, mobile, total_rs, "official", name);
         sessionManagement = new Session_management(PaymentGatWay.this);
         db_cart = new DatabaseHandler(PaymentGatWay.this);
-startPayment(name,total_rs,email,mobile);
+        startPayment(name,total_rs,email,mobile);
     }
     public void startPayment(String name,String amount,String email,String phone) {
         /*
@@ -99,7 +99,7 @@ startPayment(name,total_rs,email,mobile);
             options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
             options.put("currency", "INR");
 
-                options.put("amount", Double.valueOf(amount)*100);
+            options.put("amount", Double.valueOf(amount)*100);
 
             JSONObject preFill = new JSONObject();
 
@@ -135,7 +135,7 @@ startPayment(name,total_rs,email,mobile);
             finish();
             //  Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
             attemptOrder();
-Log.e(TAG, "Exception in onPaymentSuccess", e);
+            Log.e(TAG, "Exception in onPaymentSuccess", e);
         }
     }
 

@@ -37,7 +37,7 @@ public class Deal_OfDay_Adapter extends RecyclerView.Adapter<Deal_OfDay_Adapter.
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView product_nmae, product_prize, offer_product_prize, start_time, end_time,offer_textview;
         public ImageView image;
-      LinearLayout showproduct;
+        LinearLayout showproduct;
         public MyViewHolder(View view) {
             super(view);
 
@@ -73,7 +73,7 @@ public class Deal_OfDay_Adapter extends RecyclerView.Adapter<Deal_OfDay_Adapter.
         preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
         String language=preferences.getString("language","");
 
-         if (mList.getStatus().equals("1")) {
+        if (mList.getStatus().equals("1")) {
 
             holder.offer_product_prize.setText(context.getResources().getString(R.string.currency) + mList.getDeal_price());
             holder.offer_product_prize.setTextColor(context.getResources().getColor(R.color.green));

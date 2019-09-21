@@ -35,7 +35,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
     private Context context;
     private DatabaseHandler dbcart;
     String language;
-SharedPreferences preferences;
+    SharedPreferences preferences;
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView tv_title, tv_price, tv_reward, tv_total, tv_contetiy, tv_add;
         public ImageView iv_logo, iv_plus, iv_minus, iv_remove;
@@ -91,22 +91,22 @@ SharedPreferences preferences;
                 language=preferences.getString("language","");
 
 
-    map.put("product_id", modelList.get(position).getProduct_id());
-    map.put("product_name", modelList.get(position).getProduct_name());
-    map.put("category_id", modelList.get(position).getCategory_id());
-    map.put("product_description", modelList.get(position).getProduct_description());
-    map.put("deal_price", modelList.get(position).getDeal_price());
+                map.put("product_id", modelList.get(position).getProduct_id());
+                map.put("product_name", modelList.get(position).getProduct_name());
+                map.put("category_id", modelList.get(position).getCategory_id());
+                map.put("product_description", modelList.get(position).getProduct_description());
+                map.put("deal_price", modelList.get(position).getDeal_price());
 
-    map.put("price", modelList.get(position).getPrice());
-    map.put("product_image", modelList.get(position).getProduct_image());
-    map.put("status", modelList.get(position).getStatus());
-    map.put("in_stock", modelList.get(position).getIn_stock());
-    map.put("unit_value", modelList.get(position).getUnit_value());
-    map.put("unit", modelList.get(position).getUnit());
-    map.put("increament", modelList.get(position).getIncreament());
-    map.put("rewards", modelList.get(position).getRewards());
-    map.put("stock", modelList.get(position).getStock());
-    map.put("title", modelList.get(position).getTitle());
+                map.put("price", modelList.get(position).getPrice());
+                map.put("product_image", modelList.get(position).getProduct_image());
+                map.put("status", modelList.get(position).getStatus());
+                map.put("in_stock", modelList.get(position).getIn_stock());
+                map.put("unit_value", modelList.get(position).getUnit_value());
+                map.put("unit", modelList.get(position).getUnit());
+                map.put("increament", modelList.get(position).getIncreament());
+                map.put("rewards", modelList.get(position).getRewards());
+                map.put("stock", modelList.get(position).getStock());
+                map.put("title", modelList.get(position).getTitle());
 
 
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
@@ -206,7 +206,7 @@ SharedPreferences preferences;
         Double price = Double.parseDouble(mList.getPrice());
         Double reward = Double.parseDouble(mList.getRewards());
         holder.tv_total.setText("" + price * items);
-       holder.tv_reward.setText("" + reward * items);
+        holder.tv_reward.setText("" + reward * items);
 
     }
 
@@ -292,22 +292,22 @@ SharedPreferences preferences;
                 preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
                 language=preferences.getString("language","");
 
-                    map.put("product_id", modelList.get(position).getProduct_id());
-                    map.put("product_name", modelList.get(position).getProduct_name());
-                    map.put("category_id", modelList.get(position).getCategory_id());
-                    map.put("product_description", modelList.get(position).getProduct_description());
-                    map.put("deal_price", modelList.get(position).getDeal_price());
+                map.put("product_id", modelList.get(position).getProduct_id());
+                map.put("product_name", modelList.get(position).getProduct_name());
+                map.put("category_id", modelList.get(position).getCategory_id());
+                map.put("product_description", modelList.get(position).getProduct_description());
+                map.put("deal_price", modelList.get(position).getDeal_price());
 
-                    map.put("price", modelList.get(position).getPrice());
-                    map.put("product_image", modelList.get(position).getProduct_image());
-                    map.put("status", modelList.get(position).getStatus());
-                    map.put("in_stock", modelList.get(position).getIn_stock());
-                    map.put("unit_value", modelList.get(position).getUnit_value());
-                    map.put("unit", modelList.get(position).getUnit());
-                    map.put("increament", modelList.get(position).getIncreament());
-                    map.put("rewards", modelList.get(position).getRewards());
-                    map.put("stock", modelList.get(position).getStock());
-                    map.put("title", modelList.get(position).getTitle());
+                map.put("price", modelList.get(position).getPrice());
+                map.put("product_image", modelList.get(position).getProduct_image());
+                map.put("status", modelList.get(position).getStatus());
+                map.put("in_stock", modelList.get(position).getIn_stock());
+                map.put("unit_value", modelList.get(position).getUnit_value());
+                map.put("unit", modelList.get(position).getUnit());
+                map.put("increament", modelList.get(position).getIncreament());
+                map.put("rewards", modelList.get(position).getRewards());
+                map.put("stock", modelList.get(position).getStock());
+                map.put("title", modelList.get(position).getTitle());
 
 
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {

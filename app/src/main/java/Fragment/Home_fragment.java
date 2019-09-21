@@ -1,6 +1,9 @@
 package Fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.IntentFilter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
@@ -34,6 +37,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,13 +78,16 @@ import Model.Deal_Of_Day_model;
 import Model.Home_Icon_model;
 import Model.Product_model;
 import Model.Top_Selling_model;
+import util.DatabaseHandler;
 import vendor.tcc.AppController;
+import vendor.tcc.CartActivity;
 import vendor.tcc.CustomSlider;
 import vendor.tcc.MainActivity;
 import vendor.tcc.R;
 import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
 import util.RecyclerTouchListener;
+import vendor.tcc.SearchActivity;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -110,7 +117,9 @@ public class Home_fragment extends Fragment  {
     String getcat_title;
     ScrollView scrollView;
     SharedPreferences sharedpreferences;
+    private DatabaseHandler db;
     PagerHome_adapter pagerHome_adapter;
+    private RelativeLayout mGoToCart;
 
     //Home Icons
     private Home_Icon_Adapter menu_adapter;
@@ -130,7 +139,7 @@ public class Home_fragment extends Fragment  {
 
 
     private ImageView iv_Call, iv_Whatspp, iv_reviews, iv_share_via;
-    private TextView timer;
+    private TextView timer, tv_total,tv_item;
     Button View_all_deals, View_all_TopSell;
     private String apiResponse;
 
@@ -141,6 +150,18 @@ public class Home_fragment extends Fragment  {
     public Home_fragment() {
 
     }
+
+    private BroadcastReceiver mCart = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            String type = intent.getStringExtra("type");
+
+            if (type.contentEquals("update")) {
+                updateData();
+            }
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -192,17 +213,15 @@ public class Home_fragment extends Fragment  {
             }
         });
 
-
-
-        //Scroll View
-        scrollView = (ScrollView) view.findViewById(R.id.scroll_view);
-        scrollView.setSmoothScrollingEnabled(true);
-
         TabLayout tab_cat1 = view.findViewById(R.id.tab_layout1);
         TabItem tabChats = view.findViewById(R.id.fruits);
         TabItem tabStatus = view.findViewById(R.id.vegetables);
         TabItem tabCalls = view.findViewById(R.id.leaf);
         viewPager = view.findViewById(R.id.viewpager);
+        tv_total = view.findViewById(R.id.tv_cart_total);
+        tv_item = view.findViewById(R.id.tv_cart_item);
+        mGoToCart = view.findViewById(R.id.btn_cart_checkout);
+        db = new DatabaseHandler(getActivity());
         pagerHome_adapter = new PagerHome_adapter(getFragmentManager(), tab_cat1.getTabCount(), apiResponse);
         viewPager.setAdapter(pagerHome_adapter);
 
@@ -250,11 +269,16 @@ public class Home_fragment extends Fragment  {
         Search_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fm = new Search_fragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        mGoToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CartActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -309,7 +333,7 @@ public class Home_fragment extends Fragment  {
 //    }
 
 
-//    @Override
+    //    @Override
 //    public void onRequestPermissionsResult(int requestCode,
 //                                           String permissions[], int[] grantResults) {
 //        switch (requestCode) {
@@ -336,4 +360,27 @@ public class Home_fragment extends Fragment  {
 //        callIntent.setData(Uri.parse("tel:" + "919889887711"));
 //        startActivity(callIntent);
 //    }
+    private void updateData() {
+        tv_total.setText("" + db.getTotalAmount());
+        tv_item.setText("" + db.getCartCount());
+
+
+        //MainActivity.setCartCounter("" + db.getCartCount());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // unregister reciver
+        getActivity().unregisterReceiver(mCart);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // register reciver
+        updateData();
+        getActivity().registerReceiver(mCart, new IntentFilter("Grocery_cart"));
+    }
+
 }

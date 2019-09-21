@@ -19,6 +19,7 @@
             android:gravity="center"
             android:paddingBottom="@dimen/space_8"
             android:paddingTop="@dimen/space_8"
+            android:visibility="gone"
             android:text="@string/tv_cart_clear"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_small" />
@@ -51,6 +52,7 @@
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_large"
                     android:text="@string/tv_cart_item"
                     android:textColor="#000" />
 
@@ -58,6 +60,7 @@
                     android:id="@+id/tv_cart_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_large"
                     android:text="4"
                     android:textColor="#000" />
 
@@ -75,11 +78,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tv_cart_total"
+                    android:textSize="@dimen/text_size_large"
                     android:textColor="#000" />
                 <Fonts.LatoBLack
                     android:id="@+id/tv_cart_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_large"
                     android:text="  50"
                     android:textColor="#000" />
 
@@ -89,6 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:text="@string/currency"
+                    android:textSize="@dimen/text_size_large"
                     android:textColor="#000" />
 
 
@@ -112,7 +118,7 @@
                 android:gravity="center"
                 android:text="@string/checkout"
                 android:textColor="#0E0C0C"
-                android:textSize="@dimen/text_size_X_small" />
+                android:textSize="@dimen/text_size_large" />
 
 
         </RelativeLayout>

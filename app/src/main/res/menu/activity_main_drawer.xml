@@ -9,6 +9,7 @@
             android:icon="@drawable/ic_nav_profile"
             android:textSize="@dimen/text_size_x_large"
 
+
             android:title="@string/nav_profile" />
         <item
             android:id="@+id/nav_support"
@@ -34,12 +35,12 @@
             android:icon="@drawable/ic_exit"
             android:title="@string/nav_logout" />
 
-        <item
-            android:id="@+id/nav_powerd"
-            android:icon="@drawable/copy"
-            android:textSize="@dimen/text_size_x_large"
+        <!-- <item
+             android:id="@+id/nav_powerd"
+             android:icon="@drawable/copy"
+             android:textSize="@dimen/text_size_x_large"
 
-            android:title="@string/status_stop" />
+             android:title="@string/status_stop" />-->
 
     </group>
 </menu>

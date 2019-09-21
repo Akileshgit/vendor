@@ -20,6 +20,7 @@ public class Product_model {
     String product_name_arb;
     String product_description_arb;
     String status;
+    String min_limit;
     String in_stock;
     String unit_value;
     String unit;
@@ -27,6 +28,7 @@ public class Product_model {
     String rewards;
     String stock;
     String title;
+    String min_order_limit;
 
 
     public String  getProduct_id() {
@@ -34,9 +36,14 @@ public class Product_model {
     }
 
 
-    public void setProduct_id(String product_id) {
-        this.product_id = product_id;
+    public void setProduct_id(String product_id) { this.product_id = product_id; }
+
+    public String  getMin_order_limit() {
+        return min_order_limit;
     }
+
+
+    public void setMin_order_limit(String min_order_limit) { this.min_order_limit = min_order_limit; }
 
     public String getProduct_name() {
         return product_name;
@@ -110,9 +117,7 @@ public class Product_model {
         this.end_time = end_time;
     }
 
-    public String getPrice() {
-        return price;
-    }
+    public String getPrice() { return price; }
 
     public void setPrice(String price) {
         this.price = price;
@@ -149,6 +154,9 @@ public class Product_model {
     public void setUnit_value(String unit_value) {
         this.unit_value = unit_value;
     }
+
+    public String getMin_value() {
+        return min_limit;}
 
     public String getUnit() {
         return unit;

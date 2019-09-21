@@ -130,5 +130,10 @@ public class My_Order_activity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(My_Order_activity.this, MainActivity.class);
+        startActivity(i);
+    }
 }
 

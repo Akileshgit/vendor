@@ -28,7 +28,7 @@ public class Top_Selling_Adapter extends RecyclerView.Adapter<Top_Selling_Adapte
 
     private List<Top_Selling_model> modelList;
     private Context context;
-SharedPreferences preferences;
+    SharedPreferences preferences;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView product_nmae, product_prize;
         public ImageView image;
@@ -55,8 +55,8 @@ SharedPreferences preferences;
     @Override
     public void onBindViewHolder(Top_Selling_Adapter.MyViewHolder holder, int position) {
         Top_Selling_model mList = modelList.get(position);
-         preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
-    String language=preferences.getString("language","");
+        preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
+        String language=preferences.getString("language","");
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + mList.getProduct_image())
                 .placeholder(R.drawable.icon)

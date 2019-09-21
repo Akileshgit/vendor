@@ -24,7 +24,7 @@ public class My_Past_Order_adapter extends RecyclerView.Adapter<My_Past_Order_ad
     private List<My_Past_order_model> modelList;
     private LayoutInflater inflater;
     private Fragment currentFragment;
-SharedPreferences preferences;
+    SharedPreferences preferences;
     private Context context;
 
     public My_Past_Order_adapter(Context context, List<My_Past_order_model> modemodelList, final Fragment currentFragment) {

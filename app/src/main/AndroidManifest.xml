@@ -20,20 +20,29 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
     <application
-        android:name="vendor.tcc.AppController"
+        android:name=".AppController"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_icon"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@mipmap/ic_icon"
         android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".WalletActivity"></activity>
+        <activity android:name=".TermsConditionsActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".ViewTimeActivity" />
+        <activity android:name=".ThanksActivity" />
+        <activity android:name=".PaymentActivity" />
+        <activity android:name=".DeliveryPaymentDetailActivity" />
+        <activity android:name=".DeliveryActivity" />
+        <activity android:name=".CartActivity" />
         <activity
-            android:name="vendor.tcc.SplashActivity"
+            android:name=".SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,16 +51,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="vendor.tcc.MainActivity"
+            android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="vendor.tcc.networkconnectivity.NetworkError" />
+        <activity android:name=".networkconnectivity.NetworkError" />
         <activity
-            android:name="vendor.tcc.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <!-- Firebase Notifications -->
+            android:name=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- Firebase Notifications -->
         <service android:name="fcm.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -61,38 +68,36 @@
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
-        </service>
-
-        <!-- ./Firebase Notifications -->
+        </service> <!-- ./Firebase Notifications -->
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_live_ILgsfZCZoFIKMb"
-            />
+            android:value="rzp_live_ILgsfZCZoFIKMb" />
 
-        <activity android:name="vendor.tcc.SelectStore" />
-        <activity android:name="vendor.tcc.SelectCity" />
+        <activity android:name=".SelectStore" />
+        <activity android:name=".SelectCity" />
         <activity
-            android:name="vendor.tcc.ForgotActivity"
+            android:name=".ForgotActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="vendor.tcc.PaymentGatWay"
+            android:name=".PaymentGatWay"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="vendor.tcc.My_Order_activity" />
-        <activity android:name="vendor.tcc.MyOrderDetail" />
-        <activity android:name="vendor.tcc.RechargeWallet" />
-        <meta-data android:name="android.support.multidex.MultiDexApplication"
+        <activity android:name=".My_Order_activity" />
+        <activity android:name=".MyOrderDetail" />
+        <activity android:name=".RechargeWallet" />
+
+        <meta-data
+            android:name="android.support.multidex.MultiDexApplication"
             android:value="true" />
 
-        <activity android:name="vendor.tcc.ThanksOrder" />
-        <activity android:name="vendor.tcc.OrderFail" />
+        <activity android:name=".ThanksOrder" />
+        <activity android:name=".OrderFail" />
         <activity
             android:name="com.paytm.pgsdk.PaytmPGActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name="vendor.tcc.Paytm" />
-        <activity android:name="vendor.tcc.networkconnectivity.NoInternetConnection" />
+        <activity android:name=".Paytm" />
+        <activity android:name=".networkconnectivity.NoInternetConnection" />
     </application>
-
 
 </manifest>

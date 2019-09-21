@@ -30,10 +30,10 @@ public class PagerHome_adapter extends FragmentPagerAdapter {
                 Vegetables_fragment tab1 = new Vegetables_fragment();
                 return tab1;
             case 1:
-                Fruit_fragment tab2 = new Fruit_fragment();
+                Leaf_fragment tab2 = new Leaf_fragment();
                 return tab2;
             case 2:
-                Leaf_fragment tab3 = new Leaf_fragment();
+                Fruit_fragment tab3 = new Fruit_fragment();
                 return tab3;
             default:
                 return null;

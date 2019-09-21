@@ -325,8 +325,8 @@ public class Payment_fragment extends Fragment {
             location, String store_id, JSONArray passArray) {
         String tag_json_obj = "json_add_order_req";
         Map<String, String> params = new HashMap<String, String>();
-        params.put("date", date);
-        params.put("time", gettime);
+        params.put("date", "2019-05-18");
+        params.put("time", " ");
         params.put("user_id", userid);
         params.put("location", location);
         params.put("store_id", store_id);

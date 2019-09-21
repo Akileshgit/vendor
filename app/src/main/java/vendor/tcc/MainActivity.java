@@ -71,6 +71,7 @@ import Fragment.Edit_profile_fragment;
 import Fragment.Shop_Now_fragment;
 import Fragment.Terms_and_Condition_fragment;
 import Fragment.Wallet_fragment;
+
 import util.CustomVolleyJsonRequest;
 import vendor.tcc.networkconnectivity.NetworkError;
 import util.ConnectivityReceiver;
@@ -320,10 +321,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         My_Walllet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fm = new Wallet_fragment();
+               /* Fragment fm = new Wallet_fragment();
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
+                        .addToBackStack(null).commit();*/
+                Intent intent = new Intent(MainActivity.this, WalletActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -331,10 +334,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 if (dbcart.getCartCount() > 0) {
-                    Fragment fm = new Cart_fragment();
+                    /*Fragment fm = new Cart_fragment();
                     FragmentManager fragmentManager = getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                            .addToBackStack(null).commit();
+                    fragmentManager.beginTransaction().add(R.id.contentPanel, fm,"CART_FRAGMENT")
+                            .addToBackStack("CART_FRAGMENT").commit();
+                    getSupportFragmentManager().executePendingTransactions();*/
+                    Intent intent = new Intent(MainActivity.this, CartActivity.class);
+                    startActivity(intent);
 
                 } else {
                     Toast.makeText(MainActivity.this, "No Item in Cart", Toast.LENGTH_SHORT).show();
@@ -348,10 +354,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 if (sessionManagement.isLoggedIn()) {
-                    Fragment fm = new Edit_profile_fragment();
+                   /* Fragment fm = new Edit_profile_fragment();
                     FragmentManager fragmentManager = getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                            .addToBackStack(null).commit();
+                    fragmentManager.beginTransaction().add(R.id.contentPanel, fm)
+                            .addToBackStack(null).commit();*/
+                    Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+                    startActivity(i);
+
                 } else {
                     Intent i = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(i);
@@ -424,7 +433,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     @Override
                                     public void onClick(View view) {
 
-                                        onBackPressed();
+                                        getSupportFragmentManager().popBackStack();
                                     }
                                 });
                             }
@@ -445,7 +454,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            fireReg.RegisterUser(sessionManagement.getUserDetails().get(BaseURL.KEY_ID));
 //        }
 
-        makeGetProductRequest("123");
+        /*String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
+        if(user_id!=null)
+        {
+            makeGetProductRequest(user_id);
+        }
+        else
+        {
+            makeGetProductRequest("123");
+        }*/
+
 
     }
 
@@ -483,7 +501,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 }
                             }
                         } else {
-                            makeGetProductRequest(parent_id);
+                            //makeGetProductRequest(parent_id);
                         }
 
                     }
@@ -588,7 +606,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (sessionManagement.isLoggedIn()) {
             //  tv_number.setVisibility(View.VISIBLE);
             nav_menu.findItem(R.id.nav_logout).setVisible(true);
-            nav_menu.findItem(R.id.nav_powerd).setVisible(true);
+            // nav_menu.findItem(R.id.nav_powerd).setVisible(true);
 
 //            nav_menu.findItem(R.id.nav_user).setVisible(true);
         } else {
@@ -652,16 +670,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.action_cart) {
             if (dbcart.getCartCount() > 0) {
-                Fragment fm = new Cart_fragment();
+                /*Fragment fm = new Cart_fragment();
                 FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
+                fragmentManager.beginTransaction().add(R.id.contentPanel, fm, "CART_FRAGMENT")
+                        .addToBackStack("CART_FRAGMENT").commit();
+                getSupportFragmentManager().executePendingTransactions();*/
+                Intent intent = new Intent(MainActivity.this, CartActivity.class);
+                startActivity(intent);
             }
             else {
-                Fragment fm = new Empty_cart_fragment();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
+                Intent intent = new Intent(MainActivity.this, CartActivity.class);
+                startActivity(intent);
             }
             return true;
         }
@@ -678,8 +697,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         Fragment fm = null;
         Bundle args = new Bundle();
-         if (id == R.id.nav_my_profile) {
-            fm = new Edit_profile_fragment();
+        if (id == R.id.nav_my_profile) {
+            /* fm = new Edit_profile_fragment();*/
+            Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_support) {
             String smsNumber = "917349722228";
             Intent sendIntent = new Intent("android.intent.action.MAIN");
@@ -689,30 +710,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         } else if (id == R.id.nav_policy) {
-            fm = new Terms_and_Condition_fragment();
+            /*fm = new Terms_and_Condition_fragment();
             args.putString("url", BaseURL.GET_TERMS_URL);
             args.putString("title", getResources().getString(R.string.nav_terms));
-            fm.setArguments(args);
+            fm.setArguments(args);*/
+
+            Intent intent = new Intent(MainActivity.this, TermsConditionsActivity.class);
+            intent.putExtra("url",BaseURL.GET_TERMS_URL);
+            intent.putExtra("title",getResources().getString(R.string.nav_terms));
+            startActivity(intent);
 
 
         } else if (id == R.id.nav_logout) {
             sessionManagement.logoutSession();
-             Intent intent = new Intent(this, LoginActivity.class);
-             intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-             finish();
-             startActivity(intent);
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            finish();
+            startActivity(intent);
 
 
-        } else if (id == R.id.nav_powerd) {
+        } /*else if (id == R.id.nav_powerd) {
             // stripUnderlines(textView);
             String url = "https://fritado.com/";
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(url));
             startActivity(i);
             finish();
-        }
+        }*/
 
         if (fm != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -837,6 +863,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //    }
 
 
+
+
     @Override
     protected void onPause() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
@@ -846,10 +874,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onResume() {
         super.onResume();
-        // register reciver
+        if(dbcart!=null)
+        {
+            setCartCounter(String.valueOf(dbcart.getCartCount()));
+        }
 
+        // register reciver
+       /* String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
+        if(user_id!=null)
+        {
+            makeGetProductRequest(user_id);
+        }
+        else
+        {
+            makeGetProductRequest("123");
+        }
+
+*/
     }
 
-
-
+    @Override public void onBackPressed() {
+        getSupportFragmentManager().popBackStack();
+       /* Cart_fragment cartFragment = (Cart_fragment) getSupportFragmentManager().findFragmentByTag("CART_FRAGMENT");
+        if (cartFragment != null && cartFragment.isVisible()) {
+            FragmentManager fm = getSupportFragmentManager();
+            fm.popBackStack ("CART_FRAGMENT", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }*/
+    }
 }

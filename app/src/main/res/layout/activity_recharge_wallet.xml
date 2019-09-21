@@ -18,13 +18,14 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/white"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:titleTextAppearance="@style/RobotoBoldTextAppearance">
+            android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/pdlg_color_white"
+            android:elevation="4dp"
+            android:background="@color/greenn"
+            android:theme="@style/ToolbarColoredBackArrow" />
 
 
-        </android.support.v7.widget.Toolbar>
+
 
     </android.support.design.widget.AppBarLayout>
 

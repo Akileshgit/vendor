@@ -99,6 +99,7 @@
     <string name="tv_home_cat">Products</string>
     <string name="tv_home_view">View all ></string>
     <string name="checkout" translatable="false">Checkout</string>
+    <string name="go_to_cart" translatable="false">Go to Cart</string>
     <!-- fragment_Wallet.xml -->
     <string name="tv_app_name">Wallet</string>
     <string name="tv_product_name" translatable="false">Products</string>
@@ -237,6 +238,7 @@
     <string name="pincode">Pincode:\u0020</string>
     <string name="house_no">House No.:\u0020</string>
     <string name="socity">Society:\u0020</string>
+    <string name="merchant_address">Merchant address:\u0020</string>
 
     <string name="status_stop">Powered By <font color="#f7941e">Fritado</font></string>
 

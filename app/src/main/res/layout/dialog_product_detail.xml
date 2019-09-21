@@ -43,6 +43,7 @@
             android:layout_alignParentTop="true"
             android:orientation="vertical">
             <LinearLayout
+                android:id="@+id/details_add_sub_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/space_8"
@@ -51,9 +52,9 @@
 
                 <ImageView
                     android:id="@+id/iv_subcat_minus"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@drawable/min" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_minus" />
 
                 <TextView
                     android:id="@+id/tv_subcat_contetiy"
@@ -64,9 +65,9 @@
 
                 <ImageView
                     android:id="@+id/iv_subcat_plus"
-                    android:layout_width="27dp"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@drawable/pl" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_plus" />
 
             </LinearLayout>
 

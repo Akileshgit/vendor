@@ -38,6 +38,7 @@ import Adapter.Leaf_adapter;
 
 import Adapter.Vegetables_adapter;
 import Config.BaseURL;
+import CustomViews.DividerDecoration;
 import Model.Category_model;
 import Model.Product_model;
 import Model.Slider_subcat_model;
@@ -65,6 +66,8 @@ public class Leaf_fragment extends Fragment {
     private SliderLayout banner_slider;
     String language;
     SharedPreferences preferences;
+    DividerDecoration mItemDecoration;
+
 
     public Leaf_fragment() {
         // Required empty public constructor
@@ -136,6 +139,9 @@ public class Leaf_fragment extends Fragment {
                             }
                         }
                         adapter_leaf = new Leaf_adapter(leafsList, getActivity());
+                        mItemDecoration = new DividerDecoration(getActivity(), R.dimen.item_offset_divider);
+                        rv_cat2.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        rv_cat2.addItemDecoration(mItemDecoration);
                         rv_cat2.setAdapter(adapter_leaf);
                         adapter_leaf.notifyDataSetChanged();
                     }

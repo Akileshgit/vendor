@@ -54,7 +54,7 @@ public class View_time_adapter extends RecyclerView.Adapter<View_time_adapter.My
         String language=preferences.getString("language","");
 
 
-}
+    }
 
 
 

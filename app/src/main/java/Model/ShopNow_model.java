@@ -20,7 +20,7 @@ public class ShopNow_model {
     String status;
     String Count;
     String PCount;
-String arb_title;
+    String arb_title;
     @SerializedName("sub_cat")
     ArrayList<Category_subcat_model> category_sub_datas;
 

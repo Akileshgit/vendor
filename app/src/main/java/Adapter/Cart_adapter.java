@@ -79,11 +79,11 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
                 .into(holder.iv_logo);
         preferences = activity.getSharedPreferences("lan", MODE_PRIVATE);
         language=preferences.getString("language","");
-            holder.tv_title.setText(map.get("product_name"));
+        holder.tv_title.setText(map.get("product_name"));
 
 
-        holder.tv_price.setText(activity.getResources().getString(R.string.tv_pro_price) + map.get("unit_value") + " " +
-                map.get("unit")  + map.get("price")+activity.getResources().getString(R.string.currency));
+        holder.tv_price.setText( activity.getResources().getString(R.string.currency)+map.get("price")+ activity.getResources().getString(R.string.tv_pro_price)+
+                map.get("unit_value") + " " + map.get("unit")  );
         holder.tv_contetiy.setText(map.get("qty"));
         Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id")));
         Double price = Double.parseDouble(map.get("price"));
@@ -108,6 +108,10 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
                     notifyDataSetChanged();
 
                     updateintent();
+                }else
+                {
+                    dbHandler.updateQtyByProductId(map.get("product_id"),String.valueOf(qty));
+                    updateintent();
                 }
             }
         });
@@ -120,6 +124,8 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
                 qty = qty + 1;
 
                 holder.tv_contetiy.setText(String.valueOf(qty));
+                dbHandler.updateQtyByProductId(map.get("product_id"),String.valueOf(qty));
+                updateintent();
             }
         });
 
@@ -134,7 +140,7 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
 
                 holder.tv_total.setText("" + price * items);
 
-             //   holder.tv_total.setText(activity.getResources().getString(R.string.tv_cart_total) + price * items + " " + activity.getResources().getString(R.string.currency));
+                //   holder.tv_total.setText(activity.getResources().getString(R.string.tv_cart_total) + price * items + " " + activity.getResources().getString(R.string.currency));
                 updateintent();
             }
         });

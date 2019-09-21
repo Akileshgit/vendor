@@ -16,33 +16,34 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/white"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:titleTextAppearance="@style/RobotoBoldTextAppearance">
+            android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/pdlg_color_white"
+            android:elevation="4dp"
+            android:background="@color/greenn"
+            android:theme="@style/ToolbarColoredBackArrow" />
 
-            <!--<RelativeLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
+        <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-            <!--<ImageView-->
-            <!--android:id="@+id/back_button"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@drawable/ic_arrow_back_black_24dp" />-->
+        <!--<ImageView-->
+        <!--android:id="@+id/back_button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/ic_arrow_back_black_24dp" />-->
 
-            <!--<Fonts.LatoBLack-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_toRightOf="@id/back_button"-->
-            <!--android:layout_marginLeft="@dimen/space_8"-->
-            <!--android:text="Products"-->
-            <!--android:textColor="#ffffff"-->
-            <!--android:textSize="18sp" />-->
+        <!--<Fonts.LatoBLack-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_toRightOf="@id/back_button"-->
+        <!--android:layout_marginLeft="@dimen/space_8"-->
+        <!--android:text="Products"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:textSize="18sp" />-->
 
-            <!--</RelativeLayout>-->
+        <!--</RelativeLayout>-->
 
-        </android.support.v7.widget.Toolbar>
+
 
     </android.support.design.widget.AppBarLayout>
 

@@ -1,5 +1,8 @@
 package Fragment;
 
+import android.app.ProgressDialog;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.BroadcastReceiver;
@@ -8,7 +11,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -35,6 +40,8 @@ import java.util.HashMap;
 
 import Adapter.Cart_adapter;
 import Config.BaseURL;
+import CustomViews.DividerDecoration;
+
 import vendor.tcc.AppController;
 import vendor.tcc.LoginActivity;
 import vendor.tcc.MainActivity;
@@ -58,6 +65,8 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
     private DatabaseHandler db;
 
     private Session_management sessionManagement;
+    DividerDecoration mItemDecoration;
+    ArrayList<HashMap<String, String>> map;
 
     public Cart_fragment() {
         // Required empty public constructor
@@ -83,20 +92,15 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
         tv_item = (TextView) view.findViewById(R.id.tv_cart_item);
         btn_checkout = (RelativeLayout) view.findViewById(R.id.btn_cart_checkout);
         rv_cart = (RecyclerView) view.findViewById(R.id.rv_cart);
-        rv_cart.setLayoutManager(new LinearLayoutManager(getActivity()));
+
 
         db = new DatabaseHandler(getActivity());
 
-        ArrayList<HashMap<String, String>> map = db.getCartAll();
-
-        Cart_adapter adapter = new Cart_adapter(getActivity(), map);
-        rv_cart.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-        updateData();
-
         tv_clear.setOnClickListener(this);
         btn_checkout.setOnClickListener(this);
+        new AsyncTaskRunner().execute();
+
+
 
         return view;
     }
@@ -142,6 +146,9 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
                 db.clearCart();
                 ArrayList<HashMap<String, String>> map = db.getCartAll();
                 Cart_adapter adapter = new Cart_adapter(getActivity(), map);
+                mItemDecoration = new DividerDecoration(getActivity(), R.dimen.item_offset_divider);
+                rv_cart.addItemDecoration(mItemDecoration);
+                rv_cart.setLayoutManager(new LinearLayoutManager(getActivity()));
                 rv_cart.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 
@@ -253,6 +260,8 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
         getActivity().registerReceiver(mCart, new IntentFilter("Grocery_cart"));
     }
 
+
+
     // broadcast reciver for receive data
     private BroadcastReceiver mCart = new BroadcastReceiver() {
         @Override
@@ -265,6 +274,44 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
             }
         }
     };
+
+
+    private class AsyncTaskRunner extends AsyncTask<String, String, String> {
+
+        private String resp;
+        ProgressDialog progressDialog;
+
+        @Override
+        protected String doInBackground(String... params) {
+            publishProgress("Sleeping..."); // Calls onProgressUpdate()
+            map = db.getCartAll();
+            updateData();
+
+            return resp;
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            // execution of result of Long time consuming operation
+            progressDialog.dismiss();
+            Cart_adapter adapter = new Cart_adapter(getActivity(), map);
+            mItemDecoration = new DividerDecoration(getActivity(), R.dimen.item_offset_divider);
+            rv_cart.addItemDecoration(mItemDecoration);
+            rv_cart.setLayoutManager(new LinearLayoutManager(getActivity()));
+            rv_cart.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = ProgressDialog.show(getActivity(),
+                    "ProgressDialog",
+                    "Loading...");        }
+
+    }
 
 
 }

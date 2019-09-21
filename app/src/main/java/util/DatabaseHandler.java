@@ -181,6 +181,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
+    public void updateQtyByProductId(String productId, String qty){
+        db = getWritableDatabase();
+        ContentValues data = new ContentValues();
+        data.put(COLUMN_QTY, qty);
+        db.update(CART_TABLE, data, COLUMN_ID+"=?", new String[] {productId});
+
+    }
+
     public String getFavConcatString() {
         db = getReadableDatabase();
         String qry = "Select *  from " + CART_TABLE;

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -38,6 +39,7 @@ import Adapter.Vegetables_adapter;
 
 
 import Config.BaseURL;
+import CustomViews.DividerDecoration;
 import Model.Category_model;
 import Model.Product_model;
 import Model.Slider_subcat_model;
@@ -65,6 +67,7 @@ public class Vegetables_fragment extends Fragment {
     private SliderLayout banner_slider;
     String language;
     SharedPreferences preferences;
+    DividerDecoration mItemDecoration;
 
     public Vegetables_fragment() {
         // Required empty public constructor
@@ -140,6 +143,9 @@ public class Vegetables_fragment extends Fragment {
                             }
                         }
                         adapter_vegetables = new Vegetables_adapter(vegitablesList, getActivity());
+                        mItemDecoration = new DividerDecoration(getActivity(), R.dimen.item_offset_divider);
+                        rv_cat1.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        rv_cat1.addItemDecoration(mItemDecoration);
                         rv_cat1.setAdapter(adapter_vegetables);
                         adapter_vegetables.notifyDataSetChanged();
                     }

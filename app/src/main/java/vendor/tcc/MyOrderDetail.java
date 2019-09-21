@@ -54,7 +54,7 @@ public class MyOrderDetail extends AppCompatActivity {
 
     private String sale_id;
     ImageView back_button;
-     SharedPreferences preferences;
+    SharedPreferences preferences;
     private List<My_order_detail_model> my_order_detail_modelList = new ArrayList<>();
 
     public MyOrderDetail() {
@@ -111,8 +111,8 @@ public class MyOrderDetail extends AppCompatActivity {
         preferences = getSharedPreferences("lan", MODE_PRIVATE);
         String language=preferences.getString("language","");
         if (language.contains("spanish")) {
-           time=time.replace("pm","م");
-           time=time.replace("am","ص");
+            time=time.replace("pm","م");
+            time=time.replace("am","ص");
             tv_time.setText(getResources().getString(R.string.time) + time);
 
         }else {
@@ -131,17 +131,17 @@ public class MyOrderDetail extends AppCompatActivity {
             // ((MainActivity) getApplication()).onNetworkConnectionChanged(false);
         }
 
-        btn_cancle.setOnClickListener(new View.OnClickListener() {
+       /* btn_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDeleteDialog();
             }
-        });
+        });*/
 
     }
 
     // alertdialog for cancle order
-    private void showDeleteDialog() {
+  /*  private void showDeleteDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyOrderDetail.this);
         alertDialog.setMessage(getResources().getString(R.string.cancle_order_note));
         alertDialog.setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -164,10 +164,10 @@ public class MyOrderDetail extends AppCompatActivity {
 
                 dialogInterface.dismiss();
             }
-        });
+        });*/
 
-        alertDialog.show();
-    }
+       /* alertDialog.show();
+    }*/
 
     /**
      * Method to make json array request where json response starts wtih

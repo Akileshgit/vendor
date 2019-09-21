@@ -47,8 +47,8 @@ public class MyFirebaseRegister {
         String token = FirebaseInstanceId.getInstance().getToken();
         FirebaseMessaging.getInstance().subscribeToTopic("grocery");
         // [END subscribe_topics]
-      //  mLogTask = new fcmRegisterTask();
-     //   mLogTask.execute(user_id,token);
+        //  mLogTask = new fcmRegisterTask();
+        //   mLogTask.execute(user_id,token);
         checkLogin(user_id, token);
     }
 

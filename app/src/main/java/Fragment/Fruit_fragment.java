@@ -44,6 +44,7 @@ import Adapter.Fruit_adapter;
 import Adapter.My_Past_Order_adapter;
 import Adapter.Product_adapter;
 import Config.BaseURL;
+import CustomViews.DividerDecoration;
 import Model.Category_model;
 import Model.My_Past_order_model;
 import Model.Product_model;
@@ -74,6 +75,9 @@ public class Fruit_fragment extends Fragment {
     private SliderLayout banner_slider;
     String language;
     SharedPreferences preferences;
+    DividerDecoration mItemDecoration;
+
+
 
     public Fruit_fragment() {
         // Required empty public constructor
@@ -146,7 +150,7 @@ public class Fruit_fragment extends Fragment {
 
             @Override
             public void onResponse(JSONObject response) {
-
+                Log.d("Deepak Response",response.toString());
 
                 try {
                     Boolean status = response.getBoolean("responce");
@@ -168,6 +172,9 @@ public class Fruit_fragment extends Fragment {
                             }
                         }
                         adapter_fruit = new Fruit_adapter(fruitsList, getActivity());
+                        mItemDecoration = new DividerDecoration(getActivity(), R.dimen.item_offset_divider);
+                        rv_cat.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        rv_cat.addItemDecoration(mItemDecoration);
                         rv_cat.setAdapter(adapter_fruit);
                         adapter_fruit.notifyDataSetChanged();
                         if (getActivity() != null) {

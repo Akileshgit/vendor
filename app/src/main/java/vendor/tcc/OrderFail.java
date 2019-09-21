@@ -34,9 +34,9 @@ public class OrderFail extends AppCompatActivity {
         oredr_fail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent intent=new Intent(OrderFail.this,MainActivity.class);
-              startActivity(intent);
-              finish();
+                Intent intent=new Intent(OrderFail.this,MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

@@ -3,15 +3,17 @@ package Fragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+
 import vendor.tcc.MainActivity;
 import vendor.tcc.R;
 
-public class Empty_cart_fragment extends Fragment {
+public class Empty_cart_fragment extends Fragment{
 
     private static String TAG = Empty_cart_fragment.class.getSimpleName();
 
@@ -44,6 +46,8 @@ public class Empty_cart_fragment extends Fragment {
 
         return view;
     }
+
+
 
 
 }

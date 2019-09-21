@@ -125,8 +125,8 @@ public class My_Pending_Order_adapter extends RecyclerView.Adapter<My_Pending_Or
             holder.relativetextstatus.setText(context.getResources().getString(R.string.outfordeliverd));
             holder.tv_status.setTextColor(context.getResources().getColor(R.color.green));
         }
-           else if (mList.getStatus().equals("4")) {
-holder.linearLayout.setVisibility(View.GONE);
+        else if (mList.getStatus().equals("4")) {
+            holder.linearLayout.setVisibility(View.GONE);
         }
 
         if (mList.getPayment_method().equals("Store Pick Up")) {

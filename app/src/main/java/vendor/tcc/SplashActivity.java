@@ -60,7 +60,7 @@ public class SplashActivity extends AppCompatActivity {
                 ContextCompat.checkSelfPermission(this,
                         android.Manifest.permission.ACCESS_NETWORK_STATE)
                         != PackageManager.PERMISSION_GRANTED
-                ) {
+        ) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     android.Manifest.permission.READ_EXTERNAL_STORAGE) && ActivityCompat.shouldShowRequestPermissionRationale(this,
                     android.Manifest.permission.INTERNET) && ActivityCompat.shouldShowRequestPermissionRationale(this,
@@ -108,8 +108,8 @@ public class SplashActivity extends AppCompatActivity {
 
     public void go_next() {
         if(sessionManagement.isLoggedIn()) {
-        Intent startmain = new Intent(SplashActivity.this, MainActivity.class);
-        startActivity(startmain);
+            Intent startmain = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(startmain);
         }
         else{
             Intent startmain = new Intent(SplashActivity.this, LoginActivity.class);
