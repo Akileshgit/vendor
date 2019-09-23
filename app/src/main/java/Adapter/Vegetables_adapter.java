@@ -37,6 +37,7 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
     private Context context;
     private DatabaseHandler dbcart;
     String language;
+    static int quantity;
     SharedPreferences preferences;
     HashMap<String, String> map = new HashMap<>();
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -77,18 +78,14 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
             int position = getAdapterPosition();
             if (id == R.id.iv_subcat_plus) {
 
+                Log.e("TAG",modelList.get(position).getMin_value() + ""+modelList.get(position).getUnit());
 
-                    Log.e("TAG",modelList.get(position).getMin_value() + ""+modelList.get(position).getUnit());
-
-                    /*   String qty = String.valueOf(tv_contetiy.getText().toString());*/
-
-                    Integer qty = Integer.parseInt(tv_contetiy.getText().toString());
-
-                    qty++;
-                    tv_contetiy.setText(String.valueOf(qty));
+                /*   String qty = String.valueOf(tv_contetiy.getText().toString());*/
 
 
+                tv_contetiy.setText(String.valueOf(quantity));
 
+                quantity++;
 
 
                 preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
@@ -217,8 +214,8 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
             holder.tv_title.setText(mList.getProduct_name_arb());
 
         }
-        holder.tv_contetiy.setText(mList.getMin_value());
-
+        holder.tv_contetiy.setText("0");
+        quantity= Integer.parseInt(modelList.get(position).getMin_value());
         holder.tv_price.setText(context.getResources().getString(R.string.currency) + mList.getPrice() + context.getResources().getString(R.string.tv_pro_price) +
                 " " + mList.getUnit());
         if (Integer.valueOf(modelList.get(position).getStock())<=0){
@@ -245,7 +242,7 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
         Double price = Double.parseDouble(mList.getPrice());
         Double reward = Double.parseDouble(mList.getRewards());
         holder.tv_total.setText("" + price * items);
-        holder.tv_min.setText("Min"+" "+mList.getMin_value()+" "+mList.getUnit()+"/"+"Qty +"+mList.getMin_value()+" "+mList.getUnit());
+        holder.tv_min.setText("Min"+" "+mList.getMin_value()+" "+mList.getUnit()+"/"+"Qty +"+"1"+" "+mList.getUnit());
 
     }
 

@@ -38,10 +38,11 @@ public class Fruit_adapter extends RecyclerView.Adapter<Fruit_adapter.MyViewHold
     private Context context;
     private DatabaseHandler dbcart;
     String language;
+    static int quantity;
     SharedPreferences preferences;
     HashMap<String, String> map = new HashMap<>();
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView tv_title, tv_price, tv_reward, tv_total, tv_contetiy, tv_add ,tv_min;
+        public TextView tv_title, tv_price, tv_min, tv_total, tv_contetiy, tv_add;
         public ImageView iv_logo, iv_plus, iv_minus, iv_remove;
         public Double reward;
         private RelativeLayout mAddRemoveLayout;
@@ -69,7 +70,6 @@ public class Fruit_adapter extends RecyclerView.Adapter<Fruit_adapter.MyViewHold
 
             CardView cardView = (CardView) view.findViewById(R.id.card_view);
             cardView.setOnClickListener(this);
-
         }
 
         @Override
@@ -82,10 +82,11 @@ public class Fruit_adapter extends RecyclerView.Adapter<Fruit_adapter.MyViewHold
 
                 /*   String qty = String.valueOf(tv_contetiy.getText().toString());*/
 
-                Integer qty = Integer.parseInt(tv_contetiy.getText().toString());
 
-                qty++;
-                tv_contetiy.setText(String.valueOf(qty));
+                tv_contetiy.setText(String.valueOf(quantity));
+
+                quantity++;
+
 
 
 
@@ -109,6 +110,7 @@ public class Fruit_adapter extends RecyclerView.Adapter<Fruit_adapter.MyViewHold
                 map.put("in_stock", modelList.get(position).getIn_stock());
                 map.put("unit_value", modelList.get(position).getUnit_value());
                 map.put("min_limit", modelList.get(position).getMin_value());
+
                 map.put("unit", modelList.get(position).getUnit());
                 map.put("increament", modelList.get(position).getIncreament());
                 map.put("rewards", modelList.get(position).getRewards());
@@ -144,6 +146,7 @@ public class Fruit_adapter extends RecyclerView.Adapter<Fruit_adapter.MyViewHold
                 if (qty > Integer.parseInt(String.valueOf(mList.getMin_value()))) {
                     qty = qty - 1;
                     tv_contetiy.setText(String.valueOf(qty));
+
                     if (tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
                         dbcart.removeItemFromCart(modelList.get(position).getProduct_id());
                         //modelList.remove(position);
@@ -151,16 +154,12 @@ public class Fruit_adapter extends RecyclerView.Adapter<Fruit_adapter.MyViewHold
 
                         updateintent();
                         ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
-                    }
-                    else
+                    }else
                     {
                         dbcart.updateQtyByProductId(modelList.get(position).getProduct_id(),String.valueOf(qty));
                         updateintent();
                     }
-                } else{
-                    qty = 0;
-                    tv_contetiy.setText(String.valueOf(qty));
-                    updateintent();
+
 
                 }
 
@@ -183,14 +182,13 @@ public class Fruit_adapter extends RecyclerView.Adapter<Fruit_adapter.MyViewHold
                             position, tv_contetiy.getText().toString());
                 }
             }
-
         }
     }
-
     public Fruit_adapter(List<Product_model> modelList, Context context) {
         this.modelList = modelList;
         dbcart = new DatabaseHandler(context);
     }
+
 
     @Override
     public Fruit_adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -211,38 +209,34 @@ public class Fruit_adapter extends RecyclerView.Adapter<Fruit_adapter.MyViewHold
                 .dontAnimate()
                 .into(holder.iv_logo);
         preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
-        language = preferences.getString("language", "");
+        language=preferences.getString("language","");
         if (language.contains("english")) {
             holder.tv_title.setText(mList.getProduct_name());
-        } else {
+        }
+        else {
             holder.tv_title.setText(mList.getProduct_name_arb());
 
         }
-        holder.tv_contetiy.setText(mList.getMin_value());
-
+        holder.tv_contetiy.setText("0");
+        quantity= Integer.parseInt(modelList.get(position).getMin_value());
         holder.tv_price.setText(context.getResources().getString(R.string.currency) + mList.getPrice() + context.getResources().getString(R.string.tv_pro_price) +
                 " " + mList.getUnit());
-        if (Integer.valueOf(modelList.get(position).getStock()) <= 0) {
+        if (Integer.valueOf(modelList.get(position).getStock())<=0){
             holder.tv_add.setVisibility(View.VISIBLE);
             holder.tv_add.setText(R.string.tv_out);
             holder.tv_add.setTextColor(context.getResources().getColor(R.color.black));
             holder.tv_add.setBackgroundColor(context.getResources().getColor(R.color.white));
             holder.mAddRemoveLayout.setVisibility(View.INVISIBLE);
-            holder.tv_add.setEnabled(false);
-            holder.iv_minus.setEnabled(false);
-            holder.iv_plus.setEnabled(false);
+            //holder.tv_add.setEnabled(false);
+            //holder.iv_minus.setEnabled(false);
+            //holder.iv_plus.setEnabled(false);
         }
 
-
         else  if (dbcart.isInCart(mList.getProduct_id())) {
-            holder.iv_plus.setEnabled(true);
-            holder.iv_minus.setEnabled(true);
             holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
             holder.tv_add.setVisibility(View.GONE);
             holder.mAddRemoveLayout.setVisibility(View.VISIBLE);
         } else {
-            holder.iv_plus.setEnabled(true);
-            holder.iv_minus.setEnabled(true);
             holder.mAddRemoveLayout.setVisibility(View.VISIBLE);
             holder.tv_add.setVisibility(View.GONE);
             holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
@@ -250,12 +244,10 @@ public class Fruit_adapter extends RecyclerView.Adapter<Fruit_adapter.MyViewHold
         Double items = Double.parseDouble(dbcart.getInCartItemQty(mList.getProduct_id()));
         Double price = Double.parseDouble(mList.getPrice());
         Double reward = Double.parseDouble(mList.getRewards());
-        holder.tv_total.setText( "" + price * items);
-        holder.tv_min.setText("Min"+ " "+mList.getUnit_value() + " " + mList.getUnit());
-
+        holder.tv_total.setText("" + price * items);
+        holder.tv_min.setText("Min"+" "+mList.getMin_value()+" "+mList.getUnit()+"/"+"Qty +"+mList.getMin_value()+" "+mList.getUnit());
 
     }
-
     @Override
     public int getItemCount() {
         return modelList.size();
@@ -304,7 +296,6 @@ public class Fruit_adapter extends RecyclerView.Adapter<Fruit_adapter.MyViewHold
         TextView tv_detail = (TextView) dialog.findViewById(R.id.tv_product_detail);
         final TextView tv_contetiy = (TextView) dialog.findViewById(R.id.tv_subcat_contetiy);
         final TextView tv_add = (TextView) dialog.findViewById(R.id.tv_subcat_add);
-        LinearLayout details_add_sub_layout = (LinearLayout) dialog.findViewById(R.id.details_add_sub_layout);
 
         tv_title.setText(title);
         tv_detail.setText(detail);
@@ -323,7 +314,6 @@ public class Fruit_adapter extends RecyclerView.Adapter<Fruit_adapter.MyViewHold
             tv_add.setEnabled(false);
             iv_minus.setEnabled(false);
             iv_plus.setEnabled(false);
-            details_add_sub_layout.setVisibility(View.GONE);
         }
 
         else if (dbcart.isInCart(modelList.get(position).getProduct_id())) {
@@ -332,8 +322,6 @@ public class Fruit_adapter extends RecyclerView.Adapter<Fruit_adapter.MyViewHold
         } else {
             tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
         }
-
-
 
         tv_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -424,7 +412,7 @@ public class Fruit_adapter extends RecyclerView.Adapter<Fruit_adapter.MyViewHold
 
                 if (tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
                     dbcart.removeItemFromCart(map.get("product_id"));
-                    //modelList.remove(position);
+                    modelList.remove(position);
                     notifyDataSetChanged();
 
                     updateintent();
@@ -433,6 +421,7 @@ public class Fruit_adapter extends RecyclerView.Adapter<Fruit_adapter.MyViewHold
         });
 
     }
+
 
     private void updateintent() {
         Intent updates = new Intent("Grocery_cart");

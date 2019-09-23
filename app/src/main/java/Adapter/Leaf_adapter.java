@@ -37,6 +37,7 @@ public class Leaf_adapter extends RecyclerView.Adapter<Leaf_adapter.MyViewHolder
     private Context context;
     private DatabaseHandler dbcart;
     String language;
+    static int quantity;
     SharedPreferences preferences;
     HashMap<String, String> map = new HashMap<>();
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -76,15 +77,15 @@ public class Leaf_adapter extends RecyclerView.Adapter<Leaf_adapter.MyViewHolder
             int position = getAdapterPosition();
             if (id == R.id.iv_subcat_plus) {
 
-
                 Log.e("TAG",modelList.get(position).getMin_value() + ""+modelList.get(position).getUnit());
 
                 /*   String qty = String.valueOf(tv_contetiy.getText().toString());*/
 
-                Integer qty = Integer.parseInt(tv_contetiy.getText().toString());
 
-                qty++;
-                tv_contetiy.setText(String.valueOf(qty));
+                tv_contetiy.setText(String.valueOf(quantity));
+
+                quantity++;
+
 
 
 
@@ -215,7 +216,8 @@ public class Leaf_adapter extends RecyclerView.Adapter<Leaf_adapter.MyViewHolder
             holder.tv_title.setText(mList.getProduct_name_arb());
 
         }
-        holder.tv_contetiy.setText(mList.getMin_value());
+        holder.tv_contetiy.setText("0");
+        quantity= Integer.parseInt(modelList.get(position).getMin_value());
         holder.tv_price.setText(context.getResources().getString(R.string.currency) + mList.getPrice() + context.getResources().getString(R.string.tv_pro_price) +
                 " " + mList.getUnit());
         if (Integer.valueOf(modelList.get(position).getStock())<=0){

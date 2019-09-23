@@ -8,7 +8,7 @@ android {
         applicationId "com.vendor.tcc"
         minSdkVersion 24
         targetSdkVersion 28
-        versionCode 11
+        versionCode 12
         versionName "1.2"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
