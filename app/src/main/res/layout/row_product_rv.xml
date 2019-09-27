@@ -57,6 +57,7 @@
                 android:text=""
                 android:textColor="#000"
                 android:textSize="@dimen/text_size_X_small" />
+
             <Fonts.LatoBLack
                 android:id="@+id/tv_subcat_min"
                 android:layout_width="match_parent"

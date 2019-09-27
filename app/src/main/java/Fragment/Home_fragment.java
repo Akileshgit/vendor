@@ -146,6 +146,7 @@ public class Home_fragment extends Fragment  {
     private ImageView Top_Selling_Poster, Deal_Of_Day_poster;
 
     View view;
+    private int limit;
 
     public Home_fragment() {
 
@@ -214,10 +215,12 @@ public class Home_fragment extends Fragment  {
         });
 
         TabLayout tab_cat1 = view.findViewById(R.id.tab_layout1);
+
         TabItem tabChats = view.findViewById(R.id.fruits);
         TabItem tabStatus = view.findViewById(R.id.vegetables);
         TabItem tabCalls = view.findViewById(R.id.leaf);
         viewPager = view.findViewById(R.id.viewpager);
+
         tv_total = view.findViewById(R.id.tv_cart_total);
         tv_item = view.findViewById(R.id.tv_cart_item);
         mGoToCart = view.findViewById(R.id.btn_cart_checkout);

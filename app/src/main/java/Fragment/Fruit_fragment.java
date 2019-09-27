@@ -116,6 +116,7 @@ public class Fruit_fragment extends Fragment {
 
         rv_cat = (RecyclerView) view.findViewById(R.id.rv_subcategory);
         rv_cat.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         Session_management sessionManagement = new Session_management(getActivity());
         String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
 

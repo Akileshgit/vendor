@@ -62,7 +62,7 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
     @Override
     public ProductHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = null;
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_search_rv, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_product_rv, parent, false);
         return new ProductHolder(view);
     }
 
@@ -81,9 +81,10 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
         language=preferences.getString("language","");
         holder.tv_title.setText(map.get("product_name"));
 
+        holder.tv_price.setText(activity.getResources().getString(R.string.currency) + map.get("price") + activity.getResources().getString(R.string.tv_pro_price) +
+                " " + map.get("unit"));
+        holder.tv_min.setText("Min"+" "+map.get("min_limit")+" "+ map.get("unit")+"/"+"Qty +"+"1"+" "+ map.get("unit"));
 
-        holder.tv_price.setText( activity.getResources().getString(R.string.currency)+map.get("price")+ activity.getResources().getString(R.string.tv_pro_price)+
-                map.get("unit_value") + " " + map.get("unit")  );
         holder.tv_contetiy.setText(map.get("qty"));
         Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id")));
         Double price = Double.parseDouble(map.get("price"));
@@ -164,7 +165,7 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
     }
 
     class ProductHolder extends RecyclerView.ViewHolder {
-        public TextView tv_title, tv_price, tv_reward, tv_total, tv_contetiy, tv_add,
+        public TextView tv_title, tv_price, tv_min, tv_total, tv_contetiy, tv_add,
                 tv_unit, tv_unit_value;
         public ImageView iv_logo, iv_plus, iv_minus, iv_remove;
 
@@ -174,7 +175,7 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
             tv_title = (TextView) view.findViewById(R.id.tv_subcat_title);
             tv_price = (TextView) view.findViewById(R.id.tv_subcat_price);
             tv_total = (TextView) view.findViewById(R.id.tv_subcat_total);
-
+            tv_min=view.findViewById(R.id.tv_subcat_min);
             tv_contetiy = (TextView) view.findViewById(R.id.tv_subcat_contetiy);
             tv_add = (TextView) view.findViewById(R.id.tv_subcat_add);
             iv_logo = (ImageView) view.findViewById(R.id.iv_subcat_img);

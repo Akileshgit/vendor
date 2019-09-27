@@ -37,7 +37,7 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
     private Context context;
     private DatabaseHandler dbcart;
     String language;
-    static int quantity;
+    /*int quantity;*/
     SharedPreferences preferences;
     HashMap<String, String> map = new HashMap<>();
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -70,6 +70,8 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
             CardView cardView = (CardView) view.findViewById(R.id.card_view);
             cardView.setOnClickListener(this);
 
+
+
         }
 
         @Override
@@ -78,14 +80,23 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
             int position = getAdapterPosition();
             if (id == R.id.iv_subcat_plus) {
 
-                Log.e("TAG",modelList.get(position).getMin_value() + ""+modelList.get(position).getUnit());
+                Log.e("TAG",modelList.get(position).getMin_value() + "----"+modelList.get(position).getUnit());
 
-                /*   String qty = String.valueOf(tv_contetiy.getText().toString());*/
+                Integer currentvalue=0;
+                if(tv_contetiy.getText().toString().equals("0")) {
+                    currentvalue = Integer.valueOf(modelList.get(position).getMin_value());
+                    tv_contetiy.setText(String.valueOf(currentvalue));
+                }
+                else {
+                    currentvalue = Integer.valueOf(tv_contetiy.getText().toString());
+                    currentvalue++;
+                    tv_contetiy.setText(String.valueOf(currentvalue));
+                }
+
+                //Integer currentvalue= Integer.valueOf(tv_contetiy.getText().toString());
 
 
-                tv_contetiy.setText(String.valueOf(quantity));
 
-                quantity++;
 
 
                 preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
@@ -98,7 +109,7 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
                 map.put("product_description", modelList.get(position).getProduct_description());
                 map.put("deal_price", modelList.get(position).getDeal_price());
                 map.put("start_date", modelList.get(position).getStart_date());
-                map.put("start_time", modelList.get(position).getStart_time());
+               map.put("start_time", modelList.get(position).getStart_time());
                 map.put("end_date", modelList.get(position).getEnd_date());
                 map.put("end_time", modelList.get(position).getEnd_time());
                 map.put("price", modelList.get(position).getPrice());
@@ -124,7 +135,7 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
                         tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
                     }
                 } else {
-                    dbcart.removeItemFromCart(map.get("product_id"));
+                   dbcart.removeItemFromCart(map.get("product_id"));
                     tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
                 }
                 Double items = Double.parseDouble(dbcart.getInCartItemQty(map.get("product_id")));
@@ -134,31 +145,48 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
                 tv_total.setText("" + price * items);
                 updateintent();
                 ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
+
+
+
             } else if (id == R.id.iv_subcat_minus) {
-                Product_model mList = modelList.get(position);
-                int qty = 0;
-                if (!tv_contetiy.getText().toString().equalsIgnoreCase(""))
-                    qty = Integer.valueOf(tv_contetiy.getText().toString());
-
-                if (qty > Integer.parseInt(String.valueOf(mList.getMin_value()))) {
-                    qty = qty - 1;
-                    tv_contetiy.setText(String.valueOf(qty));
-
-                    if (tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
-                        dbcart.removeItemFromCart(modelList.get(position).getProduct_id());
-                        //modelList.remove(position);
-                        notifyDataSetChanged();
-
-                        updateintent();
-                        ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
-                    }else
-                    {
-                        dbcart.updateQtyByProductId(modelList.get(position).getProduct_id(),String.valueOf(qty));
-                        updateintent();
-                    }
 
 
+
+
+                Integer currentvalue= Integer.valueOf(tv_contetiy.getText().toString());
+
+                //Integer currentvalue= Integer.valueOf(modelList.get(position).getMin_value());
+                if(currentvalue>Integer.valueOf(modelList.get(position).getMin_value())) {
+                    currentvalue--;
+                    tv_contetiy.setText(String.valueOf(currentvalue));
                 }
+                else            tv_contetiy.setText("0");
+
+//
+//                Product_model mList = modelList.get(position);
+//                int qty = 0;
+//                if (!tv_contetiy.getText().toString().equalsIgnoreCase(""))
+//                    qty = Integer.valueOf(tv_contetiy.getText().toString());
+//
+//                if (qty > Integer.parseInt(String.valueOf(mList.getMin_value()))) {
+//                    qty = qty - 1;
+//                    tv_contetiy.setText(String.valueOf(qty));
+//
+//                    if (tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
+//                        dbcart.removeItemFromCart(modelList.get(position).getProduct_id());
+//                        //modelList.remove(position);
+//                        notifyDataSetChanged();
+//
+//                        updateintent();
+//                        ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
+//                    }else
+//                    {
+//                        dbcart.updateQtyByProductId(modelList.get(position).getProduct_id(),String.valueOf(qty));
+//                        updateintent();
+//                    }
+//
+//
+//                }
 
 
             } else if (id == R.id.iv_subcat_img) {
@@ -211,11 +239,11 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
             holder.tv_title.setText(mList.getProduct_name());
         }
         else {
-            holder.tv_title.setText(mList.getProduct_name_arb());
+            holder.tv_title.setText(mList.getProduct_name());
 
         }
-        holder.tv_contetiy.setText("0");
-        quantity= Integer.parseInt(modelList.get(position).getMin_value());
+       /* holder.tv_contetiy.setText("0");
+        quantity= Integer.parseInt(modelList.get(position).getMin_value());*/
         holder.tv_price.setText(context.getResources().getString(R.string.currency) + mList.getPrice() + context.getResources().getString(R.string.tv_pro_price) +
                 " " + mList.getUnit());
         if (Integer.valueOf(modelList.get(position).getStock())<=0){
@@ -244,6 +272,11 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
         holder.tv_total.setText("" + price * items);
         holder.tv_min.setText("Min"+" "+mList.getMin_value()+" "+mList.getUnit()+"/"+"Qty +"+"1"+" "+mList.getUnit());
 
+
+
+
+        Integer currentvalue= Integer.valueOf(modelList.get(position).getMin_value());
+        holder.tv_contetiy.setText("0");
     }
 
     @Override
