@@ -11,9 +11,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Rajesh Dabhi on 26/6/2017.
- */
+
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -112,10 +110,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             db = getReadableDatabase();
             String qry = "Select *  from " + CART_TABLE + " where " + COLUMN_ID + " = " + id;
             Cursor cursor = db.rawQuery(qry, null);
+
             cursor.moveToFirst();
+
             return cursor.getString(cursor.getColumnIndex(COLUMN_QTY));
         } else {
-            return "0.0";
+            return "0";
         }
     }
 

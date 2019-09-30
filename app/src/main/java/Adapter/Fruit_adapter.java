@@ -84,14 +84,18 @@ public class Fruit_adapter extends RecyclerView.Adapter<Fruit_adapter.MyViewHold
                 Log.e("TAG",modelList.get(position).getMin_value() + "----"+modelList.get(position).getUnit());
 
                 Integer currentvalue=0;
+                Integer plusvalue=0;
                 if(tv_contetiy.getText().toString().equals("0")) {
                     currentvalue = Integer.valueOf(modelList.get(position).getMin_value());
+
                     tv_contetiy.setText(String.valueOf(currentvalue));
                 }
                 else {
                     currentvalue = Integer.valueOf(tv_contetiy.getText().toString());
-                    currentvalue++;
-                    tv_contetiy.setText(String.valueOf(currentvalue));
+                    plusvalue =Integer.valueOf(modelList.get(position).getPlus());
+
+                    tv_contetiy.setText(String.valueOf(currentvalue+plusvalue));
+
                 }
 
                 //Integer currentvalue= Integer.valueOf(tv_contetiy.getText().toString());
@@ -155,39 +159,35 @@ public class Fruit_adapter extends RecyclerView.Adapter<Fruit_adapter.MyViewHold
 
 
                 Integer currentvalue= Integer.valueOf(tv_contetiy.getText().toString());
-
+                Integer  plusvalue =Integer.valueOf(modelList.get(position).getPlus());
                 //Integer currentvalue= Integer.valueOf(modelList.get(position).getMin_value());
                 if(currentvalue>Integer.valueOf(modelList.get(position).getMin_value())) {
-                    currentvalue--;
-                    tv_contetiy.setText(String.valueOf(currentvalue));
-                }
-                else            tv_contetiy.setText("0");
+                    /*currentvalue--;*/
 
-//
-//                Product_model mList = modelList.get(position);
-//                int qty = 0;
-//                if (!tv_contetiy.getText().toString().equalsIgnoreCase(""))
-//                    qty = Integer.valueOf(tv_contetiy.getText().toString());
-//
-//                if (qty > Integer.parseInt(String.valueOf(mList.getMin_value()))) {
-//                    qty = qty - 1;
-//                    tv_contetiy.setText(String.valueOf(qty));
-//
-//                    if (tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
-//                        dbcart.removeItemFromCart(modelList.get(position).getProduct_id());
-//                        //modelList.remove(position);
-//                        notifyDataSetChanged();
-//
-//                        updateintent();
-//                        ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
-//                    }else
-//                    {
-//                        dbcart.updateQtyByProductId(modelList.get(position).getProduct_id(),String.valueOf(qty));
-//                        updateintent();
-//                    }
-//
-//
-//                }
+                    tv_contetiy.setText(String.valueOf(currentvalue-plusvalue));
+                }
+
+
+/*
+                 else tv_contetiy.setText("0");
+*/
+
+
+
+                if (tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
+
+                    dbcart.removeItemFromCart(modelList.get(position).getProduct_id());
+                    //modelList.remove(position);
+                    notifyDataSetChanged();
+
+                    updateintent();
+                    ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
+                }else
+                {
+
+                    dbcart.updateQtyByProductId(modelList.get(position).getProduct_id(),String.valueOf(currentvalue));
+                    updateintent();
+                }
 
 
             } else if (id == R.id.iv_subcat_img) {

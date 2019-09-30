@@ -29,6 +29,7 @@ public class Product_model {
     String stock;
     String title;
     String min_order_limit;
+    String plus_limit;
 
 
     public String  getProduct_id() {
@@ -180,6 +181,14 @@ public class Product_model {
 
     public void setRewards(String rewards) {
         this.rewards = rewards;
+    }
+
+    public String getPlus() {
+        return plus_limit;
+    }
+
+    public void setPlus(String rewards) {
+        this.plus_limit = rewards;
     }
 
     public String getTitle() {

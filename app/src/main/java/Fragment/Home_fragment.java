@@ -146,7 +146,7 @@ public class Home_fragment extends Fragment  {
     private ImageView Top_Selling_Poster, Deal_Of_Day_poster;
 
     View view;
-    private int limit;
+
 
     public Home_fragment() {
 
@@ -227,7 +227,7 @@ public class Home_fragment extends Fragment  {
         db = new DatabaseHandler(getActivity());
         pagerHome_adapter = new PagerHome_adapter(getFragmentManager(), tab_cat1.getTabCount(), apiResponse);
         viewPager.setAdapter(pagerHome_adapter);
-
+        viewPager.setOffscreenPageLimit(3);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tab_cat1));
 
         tab_cat1.setSelectedTabIndicatorColor(getActivity().getResources().getColor(R.color.black));
