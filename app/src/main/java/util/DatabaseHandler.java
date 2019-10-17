@@ -20,7 +20,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private SQLiteDatabase db;
 
     public static final String CART_TABLE = "cart";
-
     public static final String COLUMN_ID = "product_id";
     public static final String COLUMN_QTY = "qty";
     public static final String COLUMN_IMAGE = "product_image";
@@ -33,6 +32,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String COLUMN_INCREAMENT = "increament";
     public static final String COLUMN_STOCK = "stock";
     public static final String COLUMN_TITLE = "title";
+//    public static final String COLUMN_PLUS = "plus_limit";
 
     public DatabaseHandler(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -55,6 +55,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + COLUMN_INCREAMENT + " DOUBLE NOT NULL, "
                 + COLUMN_STOCK + " DOUBLE NOT NULL, "
                 + COLUMN_TITLE + " TEXT NOT NULL "
+//                + COLUMN_PLUS + " TEXT NOT NULL "
                 + ")";
 
         db.execSQL(exe);
@@ -78,6 +79,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             values.put(COLUMN_REWARDS, map.get(COLUMN_REWARDS));
             values.put(COLUMN_STOCK, map.get(COLUMN_STOCK));
             values.put(COLUMN_TITLE, map.get(COLUMN_TITLE));
+//            values.put(COLUMN_PLUS, map.get(COLUMN_PLUS));
             values.put(COLUMN_UNIT, map.get(COLUMN_UNIT));
             values.put(COLUMN_UNIT_VALUE, map.get(COLUMN_UNIT_VALUE));
             db.insert(CART_TABLE, null, values);
@@ -161,6 +163,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             map.put(COLUMN_INCREAMENT, cursor.getString(cursor.getColumnIndex(COLUMN_INCREAMENT)));
             map.put(COLUMN_STOCK, cursor.getString(cursor.getColumnIndex(COLUMN_STOCK)));
             map.put(COLUMN_TITLE, cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
+//            map.put(COLUMN_PLUS, cursor.getString(cursor.getColumnIndex(COLUMN_PLUS)));
             list.add(map);
             cursor.moveToNext();
         }

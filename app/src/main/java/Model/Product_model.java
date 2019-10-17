@@ -30,6 +30,7 @@ public class Product_model {
     String title;
     String min_order_limit;
     String plus_limit;
+    String quantity;
 
 
     public String  getProduct_id() {
@@ -159,6 +160,10 @@ public class Product_model {
     public String getMin_value() {
         return min_limit;}
 
+    public void setMin_value(String min_limit) {
+        this.min_limit = min_limit;
+    }
+
     public String getUnit() {
         return unit;
     }
@@ -202,7 +207,9 @@ public class Product_model {
     public String getCategory_id() {
         return category_id;
     }
-
+    public String getQuantity() {
+        return quantity;
+    }
     public void setCategory_id(String category_id) {
         this.category_id = category_id;
     }

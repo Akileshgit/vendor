@@ -67,7 +67,7 @@ public class Vegetables_fragment extends Fragment {
     private Vegetables_adapter adapter_vegetables;
     private SliderLayout banner_slider;
     String language;
-    SharedPreferences preferences;
+    SharedPreferences sharedpreferences;
     DividerDecoration mItemDecoration;
 
     public Vegetables_fragment() {
@@ -77,6 +77,7 @@ public class Vegetables_fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -86,6 +87,11 @@ public class Vegetables_fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_vegetables, container, false);
         view.setFocusableInTouchMode(true);
         view.requestFocus();
+
+//        sharedpreferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
+//        String key = sharedpreferences.getString("key", "");
+//        Log.e("=========", key);
+
         view.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {

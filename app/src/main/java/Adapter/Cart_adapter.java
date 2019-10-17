@@ -1,9 +1,11 @@
 package Adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +17,11 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import Config.BaseURL;
+import Config.SharedPref;
+import Model.Product_model;
 import vendor.tcc.R;
 import util.DatabaseHandler;
 
@@ -31,10 +36,13 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
     Activity activity;
     String Reward;
     SharedPreferences preferences;
+    SharedPreferences.Editor editor;
     String language;
-
+    int plusvalue;
+    int currentvalue;
     int lastpostion;
     DatabaseHandler dbHandler;
+
 
     public Cart_adapter(Activity activity, ArrayList<HashMap<String, String>> list) {
         this.list = list;
@@ -78,12 +86,14 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
                 .dontAnimate()
                 .into(holder.iv_logo);
         preferences = activity.getSharedPreferences("lan", MODE_PRIVATE);
+        editor = preferences.edit();
         language=preferences.getString("language","");
         holder.tv_title.setText(map.get("product_name"));
-
+        plusvalue = preferences.getInt(map.get("product_name"), 0);
+        currentvalue = preferences.getInt(map.get("product_name"), 0);
         holder.tv_price.setText(activity.getResources().getString(R.string.currency) + map.get("price") + activity.getResources().getString(R.string.tv_pro_price) +
                 " " + map.get("unit"));
-        holder.tv_min.setText("Min"+" "+map.get("min_limit")+" "+ map.get("unit")+"/"+"Qty +"+"1"+" "+ map.get("unit"));
+        holder.tv_min.setText("Min"+" "+currentvalue+" "+ map.get("unit")+"/"+"Qty +"+plusvalue+" "+ map.get("unit"));
 
         holder.tv_contetiy.setText(map.get("qty"));
         Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id")));
@@ -91,16 +101,26 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
 
         holder.tv_total.setText("" + price * items);
 
+
         holder.iv_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int qty = 0;
+
+                plusvalue = preferences.getInt(map.get("product_name"), 0);
+
                 if (!holder.tv_contetiy.getText().toString().equalsIgnoreCase(""))
                     qty = Integer.valueOf(holder.tv_contetiy.getText().toString());
 
-                if (qty > 0) {
-                    qty = qty - 1;
+                if (qty > plusvalue) {
+                    qty = qty - plusvalue;
                     holder.tv_contetiy.setText(String.valueOf(qty));
+                    editor.putString("key", String.valueOf(qty)).commit();
+                }else
+                {
+                    qty = 0;
+                    holder.tv_contetiy.setText(String.valueOf(0));
+                    editor.putString("key", String.valueOf(qty)).commit();
                 }
 
                 if (holder.tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
@@ -121,10 +141,15 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
             @Override
             public void onClick(View view) {
 
-                int qty = Integer.valueOf(holder.tv_contetiy.getText().toString());
-                qty = qty + 1;
+                plusvalue = preferences.getInt(map.get("product_name"), 0);
 
+//                Log.e ( "==Name==", map.get("product_name"));
+
+                int qty = Integer.valueOf(holder.tv_contetiy.getText().toString());
+                qty = qty + plusvalue;
+                Log.e ( "--ssss--", ""+plusvalue );
                 holder.tv_contetiy.setText(String.valueOf(qty));
+                editor.putString("key", String.valueOf(qty)).commit();
                 dbHandler.updateQtyByProductId(map.get("product_id"),String.valueOf(qty));
                 updateintent();
             }

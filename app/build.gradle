@@ -6,9 +6,9 @@ android {
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.vendor.tcc"
-        minSdkVersion 24
+        minSdkVersion 19
         targetSdkVersion 28
-        versionCode 13
+        versionCode 15
         versionName "1.2"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true

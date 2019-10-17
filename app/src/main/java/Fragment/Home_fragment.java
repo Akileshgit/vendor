@@ -147,9 +147,9 @@ public class Home_fragment extends Fragment  {
 
     View view;
 
+    String key = "";
 
     public Home_fragment() {
-
     }
 
     private BroadcastReceiver mCart = new BroadcastReceiver() {
@@ -167,6 +167,7 @@ public class Home_fragment extends Fragment  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        db = new DatabaseHandler(getActivity());
         if (getArguments() != null) {
             Gson gson = new Gson();
             Type listType = new TypeToken<List<Product_model>>() {
@@ -175,6 +176,7 @@ public class Home_fragment extends Fragment  {
             product_modelList = gson.fromJson(apiResponse, listType);
             if(product_modelList.size()>0)
             {
+
                 for(int i=0;i<product_modelList.size();i++)
                 {
                     if(Integer.parseInt(product_modelList.get(i).getCategory_id())==8)
@@ -199,6 +201,10 @@ public class Home_fragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
         setHasOptionsMenu(true);
+
+        sharedpreferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
+        int tab_id = sharedpreferences.getInt("tab_id", 0);
+
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.app_name));
         ((MainActivity) getActivity()).updateHeader();
         view.setFocusableInTouchMode(true);
@@ -214,7 +220,7 @@ public class Home_fragment extends Fragment  {
             }
         });
 
-        TabLayout tab_cat1 = view.findViewById(R.id.tab_layout1);
+        tab_cat1 = view.findViewById(R.id.tab_layout1);
 
         TabItem tabChats = view.findViewById(R.id.fruits);
         TabItem tabStatus = view.findViewById(R.id.vegetables);
@@ -224,11 +230,16 @@ public class Home_fragment extends Fragment  {
         tv_total = view.findViewById(R.id.tv_cart_total);
         tv_item = view.findViewById(R.id.tv_cart_item);
         mGoToCart = view.findViewById(R.id.btn_cart_checkout);
-        db = new DatabaseHandler(getActivity());
+
+
+
         pagerHome_adapter = new PagerHome_adapter(getFragmentManager(), tab_cat1.getTabCount(), apiResponse);
         viewPager.setAdapter(pagerHome_adapter);
         viewPager.setOffscreenPageLimit(3);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tab_cat1));
+
+        viewPager.setCurrentItem(tab_id);
+        pagerHome_adapter.notifyDataSetChanged();
 
         tab_cat1.setSelectedTabIndicatorColor(getActivity().getResources().getColor(R.color.black));
         tab_cat1.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -281,6 +292,7 @@ public class Home_fragment extends Fragment  {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CartActivity.class);
+                intent.putExtra("tab_id", tab_cat1.getSelectedTabPosition());
                 startActivity(intent);
             }
         });

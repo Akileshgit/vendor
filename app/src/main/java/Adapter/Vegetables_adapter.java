@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import Config.BaseURL;
+import Config.SharedPref;
 import Model.Product_model;
 import util.DatabaseHandler;
 import vendor.tcc.MainActivity;
@@ -47,6 +48,7 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
         public ImageView iv_logo, iv_plus, iv_minus, iv_remove;
         public Double reward;
         private RelativeLayout mAddRemoveLayout;
+
 
         public MyViewHolder(View view) {
             super(view);
@@ -80,11 +82,8 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
             int id = view.getId();
             int position = getAdapterPosition();
             if (id == R.id.iv_subcat_plus) {
-
-                Log.e("TAG", modelList.get(position).getMin_value() + "----" + modelList.get(position).getUnit());
-
-                Integer currentvalue = 0;
-                Integer plusvalue = 0;
+                int currentvalue = 0;
+                int plusvalue = 0;
                 if (tv_contetiy.getText().toString().equals("0")) {
                     currentvalue = Integer.valueOf(modelList.get(position).getMin_value());
 
@@ -94,9 +93,9 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
                     plusvalue = Integer.valueOf(modelList.get(position).getPlus());
 
                     tv_contetiy.setText(String.valueOf(currentvalue + plusvalue));
+//                    Log.e("======plus====", ""+String.valueOf(currentvalue + plusvalue));
 
                 }
-
                 //Integer currentvalue= Integer.valueOf(tv_contetiy.getText().toString());
 
 
@@ -123,7 +122,10 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
                 map.put("increament", modelList.get(position).getIncreament());
                 map.put("rewards", modelList.get(position).getRewards());
                 map.put("stock", modelList.get(position).getStock());
-                map.put("title", modelList.get(position).getTitle());
+                map.put("title", modelList.get(position).getTitle() + "//" + modelList.get(position).getPlus());
+
+                Log.e("===title====", modelList.get(position).getTitle() + "//" + modelList.get(position).getPlus());
+//                map.put("plus_limit", modelList.get(position).getPlus());
 
 
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
@@ -148,15 +150,18 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
 
 
             } else if (id == R.id.iv_subcat_minus) {
-                Integer currentvalue = Integer.valueOf(tv_contetiy.getText().toString());
-                Integer plusvalue = Integer.valueOf(modelList.get(position).getPlus());
+                int currentvalue = Integer.valueOf(tv_contetiy.getText().toString());
+                int plusvalue = Integer.valueOf(modelList.get(position).getPlus());
                 //Integer currentvalue= Integer.valueOf(modelList.get(position).getMin_value());
                 if (currentvalue > Integer.valueOf(modelList.get(position).getMin_value())) {
                     /*currentvalue--;*/
-
                     tv_contetiy.setText(String.valueOf(currentvalue - plusvalue));
+                    currentvalue -= plusvalue;
                 }
-                else tv_contetiy.setText("0");
+                else {
+                    tv_contetiy.setText("0");
+                    currentvalue = 0;
+                }
 
                 if (tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
 
@@ -168,7 +173,6 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
                     ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
                 }else
                 {
-
                     dbcart.updateQtyByProductId(modelList.get(position).getProduct_id(),String.valueOf(currentvalue));
                     updateintent();
                 }
@@ -181,32 +185,31 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
                         ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
                     }else
                     {
-
                         dbcart.updateQtyByProductId(modelList.get(position).getProduct_id(),String.valueOf(currentvalue));
                         updateintent();
                    }*/
 
 
-                } else if (id == R.id.iv_subcat_img) {
-                    preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
-                    language = preferences.getString("language", "");
-                    Log.d("lang", language);
-                    if (language.contains("english")) {
-                        showProductDetail(modelList.get(position).getProduct_image(),
-                                modelList.get(position).getProduct_name(),
-                                modelList.get(position).getProduct_description(),
-                                "",
-                                position, tv_contetiy.getText().toString());
-                    } else {
-                        showProductDetail(modelList.get(position).getProduct_image(),
-                                modelList.get(position).getProduct_name_arb(),
-                                modelList.get(position).getProduct_description_arb(),
-                                "",
-                                position, tv_contetiy.getText().toString());
-                    }
+            } else if (id == R.id.iv_subcat_img) {
+                preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
+                language = preferences.getString("language", "");
+                Log.d("lang", language);
+                if (language.contains("english")) {
+                    showProductDetail(modelList.get(position).getProduct_image(),
+                            modelList.get(position).getProduct_name(),
+                            modelList.get(position).getProduct_description(),
+                            "",
+                            position, tv_contetiy.getText().toString());
+                } else {
+                    showProductDetail(modelList.get(position).getProduct_image(),
+                            modelList.get(position).getProduct_name_arb(),
+                            modelList.get(position).getProduct_description_arb(),
+                            "",
+                            position, tv_contetiy.getText().toString());
                 }
             }
         }
+    }
 
 
     public Vegetables_adapter(List<Product_model> modelList, Context context) {
@@ -234,6 +237,13 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
                 .into(holder.iv_logo);
         preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
         language=preferences.getString("language","");
+
+        SharedPreferences.Editor prefEditor =preferences.edit();
+        prefEditor.putInt(modelList.get(position).getProduct_name(), Integer.valueOf(modelList.get(position).getPlus() ));
+        prefEditor.commit();
+//        Log.e( "======", modelList.get(position).getPlus());
+
+
         if (language.contains("english")) {
             holder.tv_title.setText(mList.getProduct_name());
         }
@@ -243,8 +253,7 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
         }
        /* holder.tv_contetiy.setText("0");
         quantity= Integer.parseInt(modelList.get(position).getMin_value());*/
-        holder.tv_price.setText(context.getResources().getString(R.string.currency) + mList.getPrice() + context.getResources().getString(R.string.tv_pro_price) +
-                " " + mList.getUnit());
+        holder.tv_price.setText(context.getResources().getString(R.string.currency) + mList.getPrice() + context.getResources().getString(R.string.tv_pro_price) + " " + mList.getUnit());
         if (Integer.valueOf(modelList.get(position).getStock())<=0){
             holder.tv_add.setVisibility(View.VISIBLE);
             holder.tv_add.setText(R.string.tv_out);
@@ -271,11 +280,11 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
         holder.tv_total.setText("" + price * items);
         holder.tv_min.setText("Min"+" "+mList.getMin_value()+" "+mList.getUnit()+"/"+"Qty +"+mList.getPlus()+" "+mList.getUnit());
 
-
-
-
         Integer currentvalue= Integer.valueOf(modelList.get(position).getMin_value());
         holder.tv_contetiy.setText("0");
+        if (dbcart.isInCart(modelList.get(position).getProduct_id())) {
+            holder.tv_contetiy.setText(dbcart.getCartItemQty(modelList.get(position).getProduct_id()));
+        }
     }
 
     @Override
@@ -370,6 +379,7 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
                 map.put("end_date", modelList.get(position).getEnd_date());
                 map.put("end_time", modelList.get(position).getEnd_time());
                 map.put("price", modelList.get(position).getPrice());
+                map.put("min_limit", modelList.get(position).getMin_value());
                 map.put("product_image", modelList.get(position).getProduct_image());
                 map.put("status", modelList.get(position).getStatus());
                 map.put("in_stock", modelList.get(position).getIn_stock());
@@ -379,7 +389,7 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
                 map.put("rewards", modelList.get(position).getRewards());
                 map.put("stock", modelList.get(position).getStock());
                 map.put("title", modelList.get(position).getTitle());
-                map.put("plus_limit", modelList.get(position).getPlus());
+//                map.put("plus_limit", modelList.get(position).getPlus());
 
 
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
@@ -410,24 +420,14 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
                 int qty = Integer.valueOf(tv_contetiy.getText().toString());
                 qty = qty + 1;
 
-                tv_contetiy.setText(String.valueOf(qty));
+//                tv_contetiy.setText(String.valueOf(qty));
+//                ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
+//
+//                notifyItemChanged(position);
+                updateintent();
+
             }
         });
-
-        /*iv_minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int qty = 0;
-                if (!tv_contetiy.getText().toString().equalsIgnoreCase(""))
-                    qty = Integer.valueOf(tv_contetiy.getText().toString());
-
-                if (qty > 0) {
-                    qty = qty - 1;
-                    tv_contetiy.setText(String.valueOf(qty));
-                }
-
-            }
-        });*/
 
         iv_minus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -447,6 +447,12 @@ public class Vegetables_adapter extends RecyclerView.Adapter<Vegetables_adapter.
                     notifyDataSetChanged();
 
                     updateintent();
+                }
+                else{
+//                    ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
+//
+//                    notifyItemChanged(position);
+//                    updateintent();
                 }
             }
         });

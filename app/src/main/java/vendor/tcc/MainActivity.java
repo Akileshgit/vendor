@@ -30,6 +30,7 @@ import android.text.TextUtils;
 import android.text.style.URLSpan;
 import android.util.Base64;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.SubMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -159,8 +160,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void attachBaseContext(Context newBase) {
 
-
-
         newBase = LocaleHelper.onAttach(newBase);
 
         super.attachBaseContext(newBase);
@@ -171,13 +170,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         String token = FirebaseInstanceId.getInstance().getToken();
         Log.d("MYTAG", "This is your Firebase token" + token);
 
         sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
-
-
         editor = sharedPreferences.edit();
+
+        int tab_id = getIntent().getIntExtra("tab_id", 0);
+        editor.putInt("tab_id", tab_id).commit();
 
         editor.putString("language", "english");
 
@@ -709,16 +710,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(sendIntent);
 
 
-        } else if (id == R.id.nav_policy) {
-            /*fm = new Terms_and_Condition_fragment();
-            args.putString("url", BaseURL.GET_TERMS_URL);
-            args.putString("title", getResources().getString(R.string.nav_terms));
-            fm.setArguments(args);*/
 
-            Intent intent = new Intent(MainActivity.this, TermsConditionsActivity.class);
-            intent.putExtra("url",BaseURL.GET_TERMS_URL);
-            intent.putExtra("title",getResources().getString(R.string.nav_terms));
-            startActivity(intent);
 
 
         } else if (id == R.id.nav_logout) {
@@ -873,6 +865,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onResume() {
+
+        Log.e("resume","fdfddfdf");
         super.onResume();
         if(dbcart!=null)
         {
@@ -893,12 +887,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 */
     }
 
-    @Override public void onBackPressed() {
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            onBackPressed();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public void onBackPressed() {
+
+        System.exit(1);
+        finish();
+        return;
+    }
+
+  /*  @Override
+    public void onBackPressed() {
+        Log.e("home", "fsfsfsfsf");
         getSupportFragmentManager().popBackStack();
-       /* Cart_fragment cartFragment = (Cart_fragment) getSupportFragmentManager().findFragmentByTag("CART_FRAGMENT");
+        System.exit(1);
+        finish();
+       *//* Cart_fragment cartFragment = (Cart_fragment) getSupportFragmentManager().findFragmentByTag("CART_FRAGMENT");
         if (cartFragment != null && cartFragment.isVisible()) {
             FragmentManager fm = getSupportFragmentManager();
             fm.popBackStack ("CART_FRAGMENT", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        }*/
-    }
+        }*//*
+    }*/
 }

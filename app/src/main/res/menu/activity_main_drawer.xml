@@ -18,12 +18,11 @@
             android:icon="@drawable/ic_nav_support"
             android:title="@string/nav_chat" />
 
-        <item
+       <!-- <item
             android:id="@+id/nav_policy"
             android:textSize="@dimen/text_size_x_large"
-
             android:icon="@drawable/ic_nav_policy"
-            android:title="@string/nav_terms" />
+            android:title="@string/nav_terms" />-->
 
 
 

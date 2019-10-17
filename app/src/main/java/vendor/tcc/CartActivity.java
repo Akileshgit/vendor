@@ -39,6 +39,7 @@ import java.util.HashMap;
 import Adapter.Cart_adapter;
 import Config.BaseURL;
 import CustomViews.DividerDecoration;
+import Fragment.Home_fragment;
 import util.ConnectivityReceiver;
 import util.DatabaseHandler;
 import util.Session_management;
@@ -54,6 +55,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private DatabaseHandler db;
     private Session_management sessionManagement;
     private LinearLayout mEmptyLayout, mBottomLayout;
+    int tab_id = 0;
     // broadcast reciver for receive data
     private BroadcastReceiver mCart = new BroadcastReceiver() {
         @Override
@@ -71,6 +73,9 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
+        tab_id = getIntent().getIntExtra("tab_id", 0);
+        Log.e("===== tab_id ====", ""+tab_id);
 
         sessionManagement = new Session_management(CartActivity.this);
         sessionManagement.cleardatetime();
@@ -226,8 +231,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                                     fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                                             .addToBackStack(null).commit();*/
 
-                                   Intent intent = new Intent(CartActivity.this, DeliveryActivity.class);
-                                   startActivity(intent);
+                                    Intent intent = new Intent(CartActivity.this, DeliveryActivity.class);
+                                    startActivity(intent);
                                 } else {
                                     //Toast.makeText(getActivity(), "Please login or regiter.\ncontinue", Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(CartActivity.this, LoginActivity.class);
@@ -323,7 +328,10 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                onBackPressed();
+                Intent i = new Intent(CartActivity.this, MainActivity.class);
+                i.putExtra("tab_id", tab_id);
+                startActivity(i);
+//                onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);
